@@ -1,5 +1,5 @@
 package com.labelzoom.api.model;
 
-public class ILabel
+public interface ILabel
 {
 }
