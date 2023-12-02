@@ -7,6 +7,6 @@ public interface ILayer
     String getName();
     void setName(String name);
 
-    List<IComponent> getElements();
-    void setElements(List<IComponent> elements);
+    List<? extends IComponent> getElements();
+    void setElements(List<? extends IComponent> elements);
 }

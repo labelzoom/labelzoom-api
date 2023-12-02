@@ -15,7 +15,7 @@ package com.labelzoom.api.model.components;
 @Deprecated
 public interface IVariableField
 {
-    void setDataField(String fldnam);
+    void setDataField(String fieldName);
     String getDataField();
 
     void setFieldValue(String value);

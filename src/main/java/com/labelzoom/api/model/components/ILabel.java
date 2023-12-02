@@ -22,8 +22,8 @@ public interface ILabel
     PageOrientation getOrientation();
     void setOrientation(PageOrientation orientation);
 
-    List<ILayer> getLayers();
-    void setLayers(List<ILayer> layers);
+    List<? extends ILayer> getLayers();
+    void setLayers(List<? extends ILayer> layers);
 
     IDataCommand getDataCommand();
     void setDataCommand(IDataCommand dataCommand);
@@ -37,9 +37,9 @@ public interface ILabel
     UUID getId();
     void setId(UUID id);
 
-    List<IComponent> getElements();
-    List<IComponent> getSortedElements();
-    void setElements(List<IComponent> elements);
+    List<? extends IComponent> getElements();
+    List<? extends IComponent> getSortedElements();
+    void setElements(List<? extends IComponent> elements);
 
     void addElement(IComponent element);
 }
