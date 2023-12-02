@@ -12,8 +12,10 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
+import com.labelzoom.api.model.DataCloneable;
+
 @Deprecated
-public interface IVariableField
+public interface IVariableField extends DataCloneable
 {
     void setDataField(String fieldName);
     String getDataField();
