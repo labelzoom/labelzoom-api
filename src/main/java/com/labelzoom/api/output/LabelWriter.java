@@ -2,7 +2,7 @@ package com.labelzoom.api.output;
 
 import com.labelzoom.api.model.ILabel;
 
-public interface LabelWriter<E>
+public interface LabelWriter
 {
-    E write(ILabel label);
+    void write(ILabel label);
 }
