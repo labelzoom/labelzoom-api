@@ -15,7 +15,7 @@ public interface IComponent extends Cloneable
     void setRotation(float rotation);
 
     boolean isReverse();
-    void setReverse();
+    void setReverse(boolean reverse);
 
     Justification getJustification();
     void setJustification(Justification justification);
