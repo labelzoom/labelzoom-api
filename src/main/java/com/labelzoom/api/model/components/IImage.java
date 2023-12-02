@@ -2,10 +2,10 @@ package com.labelzoom.api.model.components;
 
 import java.awt.image.RenderedImage;
 
-public interface IImage extends IComponent
+public interface IImage<E extends IImage.IImageWrapper> extends IComponent
 {
-    IImageWrapper getImage();
-    void setImage(IImageWrapper imageWrapper);
+    E getImage();
+    void setImage(E imageWrapper);
 
     float getHorizontalScaling();
     void setHorizontalScaling(float horizontalScaling);
