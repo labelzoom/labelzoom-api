@@ -1,8 +1,8 @@
 package com.labelzoom.api.output;
 
-import com.labelzoom.api.model.components.ILabel;
+import com.labelzoom.api.model.components.CLabel;
 
 public interface LabelWriter
 {
-    void write(ILabel label);
+    void write(CLabel label);
 }

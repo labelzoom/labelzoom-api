@@ -1,10 +1,8 @@
 package com.labelzoom.api.model.components;
 
-import com.labelzoom.api.model.DataCloneable;
-
 import java.util.regex.Pattern;
 
-public interface IDynamicField extends DataCloneable
+public interface IDynamicField extends Cloneable, IDataField
 {
     Pattern SIMPLE_EXPRESSION_PATTERN = Pattern.compile("\"\\$\\{([A-Za-z0-9_]+)\\}\"");
     Pattern VARIABLE_EXPRESSION_PATTERN = Pattern.compile("\\$\\{([A-Za-z0-9_]+)\\}");
@@ -12,7 +10,4 @@ public interface IDynamicField extends DataCloneable
 
     void setExpression(String expression);
     String getExpression();
-
-    void setFieldValue(String value);
-    String getFieldValue();
 }

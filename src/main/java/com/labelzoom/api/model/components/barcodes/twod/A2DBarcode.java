@@ -1,4 +1,4 @@
-package com.labelzoom.api.model.components;
+package com.labelzoom.api.model.components.barcodes.twod;
 
 /* Copyright (C) 2021, LabelZoom, a subsidiary of RJF Technology Solutions, Inc.
  * All rights reserved.  Proprietary and confidential.
@@ -12,9 +12,17 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
-@Deprecated
-public interface IVariableField extends Cloneable, IDataField
+import com.labelzoom.api.model.components.barcodes.ABarcode;
+
+/**
+ * <b>***NOTE***</b> When adding additional fields to barcodes, the BarcodeDeserializer must also be updated
+ */
+public abstract class A2DBarcode extends ABarcode
 {
-    void setDataField(String fieldName);
-    String getDataField();
+	public A2DBarcode() { this(null, false); }
+
+	protected A2DBarcode(final A2DBarcode original, final boolean cloneData)
+	{
+		super(original, cloneData);
+	}
 }
