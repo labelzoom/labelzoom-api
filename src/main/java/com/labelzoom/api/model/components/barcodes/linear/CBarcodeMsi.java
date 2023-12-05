@@ -41,7 +41,7 @@ public class CBarcodeMsi extends ALinearBarcode implements IBarcodeWithWideToNar
     protected CBarcodeMsi(final CBarcodeMsi original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.MSI;
+        setBarcodeStyle(BarcodeStyle.MSI);
         if (original != null)
         {
             this.checkDigit = original.checkDigit;

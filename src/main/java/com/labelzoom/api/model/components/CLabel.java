@@ -21,33 +21,33 @@ public class CLabel
 {
     // Fields
     @Getter @Setter
-    protected int width;
+    private int width;
 
     @Getter @Setter
-    protected int height;
+    private int height;
 
     @Getter @Setter
-    protected boolean isHighRes = false;
+    private boolean isHighRes = false;
 
     @Getter @Setter
-    protected PageOrientation orientation = PageOrientation.Portrait;
+    private PageOrientation orientation = PageOrientation.Portrait;
 
     @Getter @Setter
-    protected List<CLayer> layers = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
+    private List<CLayer> layers = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
 
-    protected final Map<String, CLayer> layerMap = new TreeMap<>();
-
-    @Getter @Setter
-    protected CDataCommand dataCommand;
+    private final Map<String, CLayer> layerMap = new TreeMap<>();
 
     @Getter @Setter
-    protected String schemaLocation;
+    private CDataCommand dataCommand;
 
     @Getter @Setter
-    protected String schemaVersion = "v1";
+    private String schemaLocation;
 
     @Getter @Setter
-    protected UUID id = UUID.randomUUID();
+    private String schemaVersion = "v1";
+
+    @Getter @Setter
+    private UUID id = UUID.randomUUID();
 
     // Static/constants
     public static final String DEFAULT_LAYER_NAME = "background";
@@ -170,7 +170,13 @@ public class CLabel
 
     public void addElement(final AComponent component)
     {
-        getLayerMap().get(DEFAULT_LAYER_NAME).getElements().add(component);
+        if (layers.isEmpty())
+        {
+            final CLayer mainContainer = new CLayer();
+            mainContainer.setName(DEFAULT_LAYER_NAME);
+            layers.add(mainContainer);
+        }
+        layers.get(0).getElements().add(component);
     }
 
     /**

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter @Setter
 public class CStaticText extends AFontComponent
 {
-    protected String text;
+    private String text;
 
     /**
      * Parameterless constructor

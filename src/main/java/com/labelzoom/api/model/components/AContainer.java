@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 public abstract class AContainer extends AComponent
 {
-    protected List<AComponent> children = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
+    private final List<AComponent> children = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
 
     /**
      * Parameterless constructor
@@ -37,12 +37,9 @@ public abstract class AContainer extends AComponent
         super(original);
 
         // Clone children
-        if (original.children != null)
+        for (final AComponent component : original.children)
         {
-            for (final AComponent component : original.children)
-            {
-                children.add(component.clone());
-            }
+            children.add(component.clone());
         }
     }
 }

@@ -18,13 +18,13 @@ import lombok.Setter;
 @Getter @Setter
 public abstract class AFontComponent extends AComponent
 {
-    protected float horizontalScaling = 1.0f;
+    private float horizontalScaling = 1.0f;
 
-    protected float fontSize = 10.0f;
+    private float fontSize = 10.0f;
 
-    protected String font = "0";
+    private String font = "0";
 
-    protected boolean blankWhenNull = false;
+    private boolean blankWhenNull = false;
 
     /**
      * Parameterless constructor

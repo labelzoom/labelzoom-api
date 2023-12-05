@@ -37,7 +37,7 @@ public class CBarcodeLogmars extends ALinearBarcode implements IBarcodeWithWideT
     protected CBarcodeLogmars(final CBarcodeLogmars original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.LOGMARS;
+        setBarcodeStyle(BarcodeStyle.LOGMARS);
         if (original != null)
         {
             this.wideToNarrowRatio = original.wideToNarrowRatio;

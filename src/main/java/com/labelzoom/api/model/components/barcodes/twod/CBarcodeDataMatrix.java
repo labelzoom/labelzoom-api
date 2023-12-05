@@ -42,7 +42,7 @@ public class CBarcodeDataMatrix extends A2DBarcode
 	protected CBarcodeDataMatrix(final CBarcodeDataMatrix original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		barcodeStyle = ABarcode.BarcodeStyle.DataMatrix;
+		setBarcodeStyle(ABarcode.BarcodeStyle.DataMatrix);
 		if (original != null)
 		{
 			symbolHeight = original.symbolHeight;

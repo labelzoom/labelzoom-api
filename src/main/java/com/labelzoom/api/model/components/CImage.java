@@ -21,11 +21,11 @@ import java.awt.image.BufferedImage;
 @Getter @Setter
 public class CImage extends AComponent
 {
-    protected BufferedImage image;
+    private BufferedImage image;
 
-    protected float horizontalScaling = 1;
+    private float horizontalScaling = 1;
 
-    protected float verticalScaling = 1;
+    private float verticalScaling = 1;
 
     /**
      * Parameterless constructor

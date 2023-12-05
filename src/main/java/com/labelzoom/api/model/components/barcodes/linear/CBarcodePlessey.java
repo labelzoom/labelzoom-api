@@ -40,7 +40,7 @@ public class CBarcodePlessey extends ALinearBarcode implements IBarcodeWithCheck
     protected CBarcodePlessey(final CBarcodePlessey original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.Plessey;
+        setBarcodeStyle(BarcodeStyle.Plessey);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;

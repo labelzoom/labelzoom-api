@@ -23,11 +23,11 @@ public class CLine extends AComponent
         Horizontal, Vertical;
     }
 
-    protected Orientation orientation;
+    private Orientation orientation;
 
-    protected int thickness;
+    private int thickness;
 
-    protected int length;
+    private int length;
 
     /**
      * Parameterless constructor

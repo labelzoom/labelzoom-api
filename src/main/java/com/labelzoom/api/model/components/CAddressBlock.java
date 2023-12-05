@@ -18,15 +18,15 @@ import lombok.Setter;
 @Getter @Setter
 public class CAddressBlock extends AFontComponent
 {
-    protected boolean useLocalizedAddressFormat = true;
+    private boolean useLocalizedAddressFormat = true;
 
-    protected int staticAddressFormat = 1;
+    private int staticAddressFormat = 1;
 
-    protected boolean showContactName = false;
+    private boolean showContactName = false;
 
-    protected boolean showCountry = false;
+    private boolean showCountry = false;
 
-    protected String addressId;
+    private String addressId;
 
     /**
      * Parameterless constructor

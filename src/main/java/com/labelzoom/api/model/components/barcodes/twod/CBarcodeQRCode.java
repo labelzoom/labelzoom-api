@@ -36,8 +36,8 @@ public class CBarcodeQRCode extends A2DBarcode
 	protected CBarcodeQRCode(final CBarcodeQRCode original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		barcodeStyle = ABarcode.BarcodeStyle.QRCode;
-		rotation = 0; // ZPL doesn't support rotating QR codes
+		setBarcodeStyle(ABarcode.BarcodeStyle.QRCode);
+		setRotation(0); // ZPL doesn't support rotating QR codes
 		if (original != null)
 		{
 			model = original.model;

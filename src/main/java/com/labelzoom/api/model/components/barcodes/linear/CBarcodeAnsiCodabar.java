@@ -24,13 +24,13 @@ import lombok.Setter;
 @Getter @Setter
 public class CBarcodeAnsiCodabar extends ALinearBarcode implements IBarcodeWithCheckDigit, IBarcodeWithWideToNarrowRatio
 {
-    protected boolean checkDigitEnabled = false;
+    private boolean checkDigitEnabled = false;
 
-    protected char startCharacter = 'A';
+    private char startCharacter = 'A';
 
-    protected char stopCharacter = 'A';
+    private char stopCharacter = 'A';
 
-    protected float wideToNarrowRatio = 3.0f;
+    private float wideToNarrowRatio = 3.0f;
 
     /**
      * Parameterless constructor
@@ -44,7 +44,7 @@ public class CBarcodeAnsiCodabar extends ALinearBarcode implements IBarcodeWithC
     protected CBarcodeAnsiCodabar(final CBarcodeAnsiCodabar original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.ANSICodabar;
+        setBarcodeStyle(BarcodeStyle.ANSICodabar);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;

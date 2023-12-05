@@ -40,7 +40,7 @@ public class CBarcodeInterleaved2of5 extends ALinearBarcode implements IBarcodeW
     protected CBarcodeInterleaved2of5(final CBarcodeInterleaved2of5 original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.Interleaved2of5;
+        setBarcodeStyle(BarcodeStyle.Interleaved2of5);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;

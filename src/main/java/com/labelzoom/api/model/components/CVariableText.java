@@ -18,17 +18,17 @@ import lombok.Setter;
 @Getter @Setter
 public class CVariableText extends AFontComponent implements IDynamicField
 {
-    protected String expression;
+    private String expression;
 
-    protected String fieldValue;
+    private String fieldValue;
 
-    protected boolean autoSize = true;
+    private boolean autoSize = true;
 
-    protected int width = 0;
+    private int width = 0;
 
-    protected int height = 0;
+    private int height = 0;
 
-    protected HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left;
+    private HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left;
 
     public enum HorizontalAlignment
     {

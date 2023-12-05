@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter @Setter
 public class CBarcodeCode93 extends ALinearBarcode implements IBarcodeWithCheckDigit
 {
-    protected boolean checkDigitEnabled = false;
+    private boolean checkDigitEnabled = false;
 
     /**
      * Parameterless constructor
@@ -37,7 +37,7 @@ public class CBarcodeCode93 extends ALinearBarcode implements IBarcodeWithCheckD
     protected CBarcodeCode93(final CBarcodeCode93 original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.Code93;
+        setBarcodeStyle(BarcodeStyle.Code93);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;

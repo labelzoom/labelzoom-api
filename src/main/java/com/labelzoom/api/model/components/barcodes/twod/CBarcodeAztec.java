@@ -39,10 +39,9 @@ public class CBarcodeAztec extends A2DBarcode
 	protected CBarcodeAztec(final CBarcodeAztec original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		barcodeStyle = BarcodeStyle.Aztec;
+		setBarcodeStyle(BarcodeStyle.Aztec);
 		if (original != null)
 		{
-			rotation = original.rotation;
 			magnificationFactor = original.magnificationFactor;
 			ecicIndicator = original.ecicIndicator;
 			errorControlIndicator = original.errorControlIndicator;

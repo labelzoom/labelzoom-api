@@ -18,11 +18,11 @@ import lombok.Setter;
 @Getter @Setter
 public class CRectangle extends AComponent
 {
-    protected int width;
+    private int width;
 
-    protected int height;
+    private int height;
 
-    protected int thickness;
+    private int thickness;
 
     /**
      * Parameterless constructor

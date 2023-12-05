@@ -22,13 +22,13 @@ import lombok.Setter;
 @Getter @Setter
 public abstract class ALinearBarcode extends ABarcode
 {
-	protected ZebraBarcodeSize barcodeSize;
+	private ZebraBarcodeSize barcodeSize;
 
-	protected int height;
+	private int height;
 
-	protected boolean humanReadableEnabled;
+	private boolean humanReadableEnabled;
 
-	protected HumanReadableStyle humanReadablePosition;
+	private HumanReadableStyle humanReadablePosition;
 
 	@Getter
 	public enum ZebraBarcodeSize

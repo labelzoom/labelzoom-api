@@ -24,9 +24,9 @@ import lombok.Setter;
 @Getter @Setter
 public class CBarcodeCode11 extends ALinearBarcode implements IBarcodeWithCheckDigit, IBarcodeWithWideToNarrowRatio
 {
-    protected boolean checkDigitEnabled = false;
+    private boolean checkDigitEnabled = false;
 
-    protected float wideToNarrowRatio = 3.0f;
+    private float wideToNarrowRatio = 3.0f;
 
     /**
      * Parameterless constructor
@@ -40,7 +40,7 @@ public class CBarcodeCode11 extends ALinearBarcode implements IBarcodeWithCheckD
     protected CBarcodeCode11(final CBarcodeCode11 original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.Code11;
+        setBarcodeStyle(BarcodeStyle.Code11);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;

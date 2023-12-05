@@ -23,13 +23,13 @@ import lombok.Setter;
 @Getter @Setter
 public abstract class ABarcode extends AComponent implements IDynamicField
 {
-    protected String expression;
+    private String expression;
 
-    protected String fieldValue;
+    private String fieldValue;
 
-    protected BarcodeStyle barcodeStyle = BarcodeStyle.Unknown;
+    private BarcodeStyle barcodeStyle = BarcodeStyle.Unknown;
 
-    protected boolean blankWhenNull = false;
+    private boolean blankWhenNull = false;
 
     @Getter
     public enum BarcodeStyle

@@ -39,8 +39,8 @@ public class CBarcodeMaxicode extends A2DBarcode
 	protected CBarcodeMaxicode(final CBarcodeMaxicode original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		barcodeStyle = BarcodeStyle.UPSMaxiCode;
-		rotation = 0; // ZPL doesn't support rotating QR codes
+		setBarcodeStyle(BarcodeStyle.UPSMaxiCode);
+		setRotation(0); // ZPL doesn't support rotating Maxicodes
 		if (original != null)
 		{
 			mode = original.mode;

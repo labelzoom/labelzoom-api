@@ -37,10 +37,9 @@ public class CBarcodePDF417 extends A2DBarcode
 	protected CBarcodePDF417(final CBarcodePDF417 original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		barcodeStyle = BarcodeStyle.PDF417;
+		setBarcodeStyle(BarcodeStyle.PDF417);
 		if (original != null)
 		{
-			rotation = original.rotation;
 			rowHeight = original.rowHeight;
 			securityLevel = original.securityLevel;
 			columns = original.columns;

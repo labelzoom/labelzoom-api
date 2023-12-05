@@ -20,22 +20,22 @@ import lombok.Setter;
 public abstract class AComponent implements Cloneable {
 
     @Setter
-    protected int left;
+    private int left;
 
     @Setter
-    protected int top;
+    private int top;
 
-    protected float rotation = 0;
+    private float rotation = 0;
     public void setRotation(float rotation) { this.rotation = rotation % 360; }
 
     @Setter
-    protected boolean reverse = false;
+    private boolean reverse = false;
 
     @Setter
-    protected Justification justification = Justification.Left;
+    private Justification justification = Justification.Left;
 
     @Setter
-    protected PositioningMode positioningMode = PositioningMode.Origin;
+    private PositioningMode positioningMode = PositioningMode.Origin;
 
     /**
      * Parameterless constructor

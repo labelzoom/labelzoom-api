@@ -21,9 +21,9 @@ import java.util.List;
 @Getter @Setter
 public class CLayer
 {
-    protected String name;
+    private String name;
 
-    protected List<AComponent> elements = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
+    private List<AComponent> elements = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
 
     /**
      * Parameterless constructor

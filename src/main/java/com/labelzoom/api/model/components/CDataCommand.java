@@ -18,9 +18,9 @@ import lombok.Setter;
 @Getter @Setter
 public class CDataCommand implements Cloneable
 {
-	protected String language;
+	private String language;
 
-	protected String dataCommand;
+	private String dataCommand;
 
 	/**
 	 * Parameterless constructor

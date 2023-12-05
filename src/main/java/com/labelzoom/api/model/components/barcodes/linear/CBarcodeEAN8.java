@@ -31,7 +31,7 @@ public class CBarcodeEAN8 extends ALinearBarcode
     protected CBarcodeEAN8(final CBarcodeEAN8 original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.EAN_8;
+        setBarcodeStyle(BarcodeStyle.EAN_8);
     }
 
     @Override

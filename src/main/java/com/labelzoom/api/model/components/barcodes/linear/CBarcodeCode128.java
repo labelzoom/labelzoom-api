@@ -23,9 +23,9 @@ import lombok.Setter;
 @Getter @Setter
 public class CBarcodeCode128 extends ALinearBarcode implements IBarcodeWithCheckDigit
 {
-    protected boolean checkDigitEnabled = false;
+    private boolean checkDigitEnabled = false;
 
-    protected char uccCaseMode = 'N';
+    private char uccCaseMode = 'N';
 
     /**
      * Parameterless constructor
@@ -39,7 +39,7 @@ public class CBarcodeCode128 extends ALinearBarcode implements IBarcodeWithCheck
     protected CBarcodeCode128(final CBarcodeCode128 original, final boolean cloneData)
     {
         super(original, cloneData);
-        barcodeStyle = BarcodeStyle.Code128;
+        setBarcodeStyle(BarcodeStyle.Code128);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
