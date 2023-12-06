@@ -12,6 +12,7 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
+import com.labelzoom.api.model.Justification;
 import com.labelzoom.api.model.PositioningMode;
 import lombok.Getter;
 import lombok.Setter;

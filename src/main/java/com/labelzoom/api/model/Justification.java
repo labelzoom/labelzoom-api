@@ -1,4 +1,4 @@
-package com.labelzoom.api.model.components;
+package com.labelzoom.api.model;
 
 public enum Justification
 {
