@@ -12,7 +12,7 @@ package com.labelzoom.api.diagnostics;
  * or distributed except as authorized by the license.
  */
 
-public class Stopwatch implements AutoCloseable
+public class Stopwatch
 {
     private long startTime = 0L;
     private long stopTime = 0L;
@@ -71,11 +71,5 @@ public class Stopwatch implements AutoCloseable
     public String toString()
     {
         return String.format("%4d ms / %8d us", getElapsedMilliseconds(), getElapsedNanoseconds() / 1000);
-    }
-
-    @Override
-    public void close()
-    {
-        stop();
     }
 }
