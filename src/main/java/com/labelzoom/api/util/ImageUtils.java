@@ -20,7 +20,7 @@ public class ImageUtils
      * @param luminanceThreshold luminance threshold
      * @return the dithered 2-color image
      */
-    public static BufferedImage desaturateWithDithering(final BufferedImage image, int luminanceThreshold)
+    public static BufferedImage desaturateWithDithering(final BufferedImage image, final int luminanceThreshold, final int alphaThreshold)
     {
         // Clone original image
         final ColorModel cm = image.getColorModel();
@@ -31,9 +31,6 @@ public class ImageUtils
         // Apply dithering
         final int width = out.getWidth();
         final int height = out.getHeight();
-
-        // Two colors for dithering, typically black and white
-
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 final int pixel = out.getRGB(x, y);
@@ -44,7 +41,7 @@ public class ImageUtils
 
                 // Convert to grayscale (or use other method to choose between color1 and color2)
                 final int gray = (int)(0.299 * red + 0.587 * green + 0.114 * blue);
-                final int newPixel = gray < luminanceThreshold ? BLACK : WHITE;
+                final int newPixel = gray <= luminanceThreshold && alpha >= alphaThreshold ? BLACK : WHITE;
 
                 final int error = gray - ((newPixel == BLACK) ? 0 : 255);
 
@@ -54,7 +51,7 @@ public class ImageUtils
                 if (y < height - 1) out.setRGB(x, y + 1, applyError(out.getRGB(x, y + 1), Math.round(error * ERROR_FIVE_SIXTEENTHS)));
                 if (x < width - 1 && y < height - 1) out.setRGB(x + 1, y + 1, applyError(out.getRGB(x + 1, y + 1), Math.round(error * ERROR_ONE_SIXTEENTH)));
 
-                out.setRGB(x, y, newPixel | (alpha << 24));
+                out.setRGB(x, y, newPixel);
             }
         }
         return out;
