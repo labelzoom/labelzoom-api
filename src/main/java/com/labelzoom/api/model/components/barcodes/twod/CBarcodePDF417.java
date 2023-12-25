@@ -13,6 +13,7 @@ package com.labelzoom.api.model.components.barcodes.twod;
  */
 
 import com.labelzoom.api.model.components.AComponent;
+import com.labelzoom.api.model.components.barcodes.IBarcodeWithModuleWidth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
  * <b>***NOTE***</b> When adding additional fields to barcodes, the BarcodeDeserializer must also be updated
  */
 @Getter @Setter
-public class CBarcodePDF417 extends A2DBarcode
+public class CBarcodePDF417 extends A2DBarcode implements IBarcodeWithModuleWidth
 {
 	private int rowHeight = 1;
 
@@ -31,6 +32,8 @@ public class CBarcodePDF417 extends A2DBarcode
 	private int rows = 3;
 
 	private boolean truncateRightRow = false;
+
+	private ZebraBarcodeSize barcodeSize = ZebraBarcodeSize.Normal;
 
 	public CBarcodePDF417() { this(null, false); }
 
@@ -45,6 +48,7 @@ public class CBarcodePDF417 extends A2DBarcode
 			columns = original.columns;
 			rows = original.rows;
 			truncateRightRow = original.truncateRightRow;
+			barcodeSize = original.barcodeSize;
 		}
 	}
 

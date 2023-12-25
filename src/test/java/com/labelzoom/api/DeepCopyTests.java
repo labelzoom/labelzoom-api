@@ -25,6 +25,7 @@ public class DeepCopyTests
         final CLabel clone = label.clone();
         final String labelSerialized = assertDoesNotThrow(() -> objectMapper.writeValueAsString(label));
         final String cloneSerialized = assertDoesNotThrow(() -> objectMapper.writeValueAsString(clone));
+        assertNotSame(label, clone);
         assertEquals(labelSerialized, cloneSerialized);
     }
 }

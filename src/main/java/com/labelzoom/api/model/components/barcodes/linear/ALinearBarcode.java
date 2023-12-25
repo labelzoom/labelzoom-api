@@ -13,6 +13,7 @@ package com.labelzoom.api.model.components.barcodes.linear;
  */
 
 import com.labelzoom.api.model.components.barcodes.ABarcode;
+import com.labelzoom.api.model.components.barcodes.IBarcodeWithModuleWidth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,34 +21,15 @@ import lombok.Setter;
  * <b>***NOTE***</b> When adding additional fields to barcodes, the BarcodeDeserializer must also be updated
  */
 @Getter @Setter
-public abstract class ALinearBarcode extends ABarcode
+public abstract class ALinearBarcode extends ABarcode implements IBarcodeWithModuleWidth
 {
-	private ZebraBarcodeSize barcodeSize;
+	private ZebraBarcodeSize barcodeSize = ZebraBarcodeSize.Normal;
 
 	private int height;
 
 	private boolean humanReadableEnabled;
 
 	private HumanReadableStyle humanReadablePosition;
-
-	@Getter
-	public enum ZebraBarcodeSize
-	{
-		Smallest(1),
-		Smaller(2),
-		Normal(3),
-		Large(4),
-		XLarge(5),
-		XXLarge(6),
-		XXXLarge(7),
-		XXXXLarge(8),
-		XXXXXLarge(9);
-
-		private final int value;
-		ZebraBarcodeSize(final int value) {
-			this.value = value;
-		}
-	}
 
 	public enum HumanReadableStyle
 	{
@@ -74,15 +56,6 @@ public abstract class ALinearBarcode extends ABarcode
 			humanReadableEnabled = original.humanReadableEnabled;
 			humanReadablePosition = original.humanReadablePosition;
 		}
-	}
-
-	public ZebraBarcodeSize getBarcodeSize()
-	{
-		if (this.barcodeSize != null)
-		{
-			return this.barcodeSize;
-		}
-		return ZebraBarcodeSize.Normal;
 	}
 
 	public HumanReadableStyle getHumanReadablePosition()
