@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class DeepCopyTests
 {
-    final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     @Disabled
@@ -23,9 +23,10 @@ public class DeepCopyTests
     {
         final CLabel label = new CLabel();
         final CLabel clone = label.clone();
+        assertNotSame(label, clone);
+
         final String labelSerialized = assertDoesNotThrow(() -> objectMapper.writeValueAsString(label));
         final String cloneSerialized = assertDoesNotThrow(() -> objectMapper.writeValueAsString(clone));
-        assertNotSame(label, clone);
         assertEquals(labelSerialized, cloneSerialized);
     }
 }
