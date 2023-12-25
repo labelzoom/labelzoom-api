@@ -39,7 +39,6 @@ public class CBarcodeAztec extends A2DBarcode
 	protected CBarcodeAztec(final CBarcodeAztec original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		setBarcodeStyle(BarcodeStyle.Aztec);
 		if (original != null)
 		{
 			magnificationFactor = original.magnificationFactor;
@@ -50,6 +49,9 @@ public class CBarcodeAztec extends A2DBarcode
 			idFieldForStructuredAppend = original.idFieldForStructuredAppend;
 		}
 	}
+
+	@Override
+	public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Aztec; }
 
 	@Override
 	public AComponent clone() { return clone(false); }

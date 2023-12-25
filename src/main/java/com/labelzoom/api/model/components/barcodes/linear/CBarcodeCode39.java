@@ -40,13 +40,15 @@ public class CBarcodeCode39 extends ALinearBarcode implements IBarcodeWithCheckD
     protected CBarcodeCode39(final CBarcodeCode39 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Code39);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Code39; }
 
     @Override
     public AComponent clone() { return clone(false); }

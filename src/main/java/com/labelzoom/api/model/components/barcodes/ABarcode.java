@@ -27,8 +27,6 @@ public abstract class ABarcode extends AComponent implements IDynamicField
 
     private String fieldValue;
 
-    private BarcodeStyle barcodeStyle = BarcodeStyle.Unknown;
-
     private boolean blankWhenNull = false;
 
     @Getter
@@ -85,7 +83,6 @@ public abstract class ABarcode extends AComponent implements IDynamicField
         if (original != null)
         {
             expression = original.expression;
-            barcodeStyle = original.barcodeStyle;
             blankWhenNull = original.blankWhenNull;
             if (cloneData)
             {
@@ -93,6 +90,8 @@ public abstract class ABarcode extends AComponent implements IDynamicField
             }
         }
     }
+
+    public abstract BarcodeStyle getBarcodeStyle();
 
     @Override
     public String toString() { return getFieldValue(); }

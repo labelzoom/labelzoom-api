@@ -36,12 +36,14 @@ public class CBarcodeStandard2of5 extends ALinearBarcode
     protected CBarcodeStandard2of5(final CBarcodeStandard2of5 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Standard2of5);
         if (original != null)
         {
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Standard2of5; }
 
     @Override
     public AComponent clone() { return clone(false); }

@@ -31,8 +31,10 @@ public class CBarcodePlanetCode extends ALinearBarcode
     protected CBarcodePlanetCode(final CBarcodePlanetCode original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.PlanetCode);
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.PlanetCode; }
 
     @Override
     public AComponent clone() { return clone(false); }

@@ -44,7 +44,6 @@ public class CBarcodeAnsiCodabar extends ALinearBarcode implements IBarcodeWithC
     protected CBarcodeAnsiCodabar(final CBarcodeAnsiCodabar original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.ANSICodabar);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
@@ -53,6 +52,9 @@ public class CBarcodeAnsiCodabar extends ALinearBarcode implements IBarcodeWithC
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.ANSICodabar; }
 
     @Override
     public AComponent clone() { return clone(false); }

@@ -32,8 +32,10 @@ public class CBarcodeUpcEanExtensions extends ALinearBarcode
     protected CBarcodeUpcEanExtensions(final CBarcodeUpcEanExtensions original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.UPC_EAN);
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.UPC_EAN; }
 
     @Override
     public AComponent clone() { return clone(false); }

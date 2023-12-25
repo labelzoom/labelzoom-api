@@ -37,12 +37,14 @@ public class CBarcodeLogmars extends ALinearBarcode implements IBarcodeWithWideT
     protected CBarcodeLogmars(final CBarcodeLogmars original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.LOGMARS);
         if (original != null)
         {
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.LOGMARS; }
 
     @Override
     public void setHumanReadableEnabled(boolean value) {}

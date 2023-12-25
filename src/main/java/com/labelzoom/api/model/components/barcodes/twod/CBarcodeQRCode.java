@@ -36,8 +36,6 @@ public class CBarcodeQRCode extends A2DBarcode
 	protected CBarcodeQRCode(final CBarcodeQRCode original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		setBarcodeStyle(ABarcode.BarcodeStyle.QRCode);
-		setRotation(0); // ZPL doesn't support rotating QR codes
 		if (original != null)
 		{
 			model = original.model;
@@ -46,6 +44,12 @@ public class CBarcodeQRCode extends A2DBarcode
 			maskValue = original.maskValue;
 		}
 	}
+
+	@Override
+	public float getRotation() { return 0; } // ZPL doesn't support rotating QR codes
+
+	@Override
+	public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.QRCode; }
 
 	@Override
 	public AComponent clone() { return clone(false); }

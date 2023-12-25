@@ -37,12 +37,14 @@ public class CBarcodeIndustrial2of5 extends ALinearBarcode implements IBarcodeWi
     protected CBarcodeIndustrial2of5(final CBarcodeIndustrial2of5 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Industrial2of5);
         if (original != null)
         {
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Industrial2of5; }
 
     @Override
     public AComponent clone() { return clone(false); }

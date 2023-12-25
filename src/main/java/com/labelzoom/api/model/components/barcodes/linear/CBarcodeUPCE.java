@@ -36,12 +36,14 @@ public class CBarcodeUPCE extends ALinearBarcode implements IBarcodeWithCheckDig
     protected CBarcodeUPCE(final CBarcodeUPCE original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.UPC_E);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.UPC_E; }
 
     @Override
     public AComponent clone() { return clone(false); }

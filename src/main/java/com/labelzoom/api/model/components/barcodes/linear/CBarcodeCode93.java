@@ -37,12 +37,14 @@ public class CBarcodeCode93 extends ALinearBarcode implements IBarcodeWithCheckD
     protected CBarcodeCode93(final CBarcodeCode93 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Code93);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Code93; }
 
     @Override
     public AComponent clone() { return clone(false); }

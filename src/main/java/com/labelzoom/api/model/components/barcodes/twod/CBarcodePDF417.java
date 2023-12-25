@@ -40,7 +40,6 @@ public class CBarcodePDF417 extends A2DBarcode implements IBarcodeWithModuleWidt
 	protected CBarcodePDF417(final CBarcodePDF417 original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		setBarcodeStyle(BarcodeStyle.PDF417);
 		if (original != null)
 		{
 			rowHeight = original.rowHeight;
@@ -51,6 +50,9 @@ public class CBarcodePDF417 extends A2DBarcode implements IBarcodeWithModuleWidt
 			barcodeSize = original.barcodeSize;
 		}
 	}
+
+	@Override
+	public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.PDF417; }
 
 	@Override
 	public AComponent clone() { return clone(false); }

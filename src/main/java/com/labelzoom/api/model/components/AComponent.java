@@ -63,12 +63,12 @@ public abstract class AComponent implements Cloneable {
 
     public boolean isRotated()
     {
-        return (rotation % 180) != 0;
+        return (getRotation() % 180) != 0;
     }
 
     public boolean isInverted()
     {
-        return (Math.abs(rotation) > 90 && Math.abs(rotation) < 270);
+        return (Math.abs(getRotation()) > 90 && Math.abs(getRotation()) < 270);
     }
 
     @Override

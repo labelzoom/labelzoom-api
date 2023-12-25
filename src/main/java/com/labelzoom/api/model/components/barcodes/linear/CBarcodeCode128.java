@@ -39,13 +39,15 @@ public class CBarcodeCode128 extends ALinearBarcode implements IBarcodeWithCheck
     protected CBarcodeCode128(final CBarcodeCode128 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Code128);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
             this.uccCaseMode = original.uccCaseMode;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Code128; }
 
     @Override
     public AComponent clone() { return clone(false); }

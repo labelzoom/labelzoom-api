@@ -42,7 +42,6 @@ public class CBarcodeDataMatrix extends A2DBarcode
 	protected CBarcodeDataMatrix(final CBarcodeDataMatrix original, final boolean cloneData)
 	{
 		super(original, cloneData);
-		setBarcodeStyle(ABarcode.BarcodeStyle.DataMatrix);
 		if (original != null)
 		{
 			symbolHeight = original.symbolHeight;
@@ -54,6 +53,9 @@ public class CBarcodeDataMatrix extends A2DBarcode
 			aspectRatio = original.aspectRatio;
 		}
 	}
+
+	@Override
+	public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.DataMatrix; }
 
 	@Override
 	public AComponent clone() { return clone(false); }

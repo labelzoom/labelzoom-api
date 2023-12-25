@@ -40,13 +40,15 @@ public class CBarcodeCode11 extends ALinearBarcode implements IBarcodeWithCheckD
     protected CBarcodeCode11(final CBarcodeCode11 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.Code11);
         if (original != null)
         {
             this.checkDigitEnabled = original.checkDigitEnabled;
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.Code11; }
 
     @Override
     public AComponent clone() { return clone(false); }

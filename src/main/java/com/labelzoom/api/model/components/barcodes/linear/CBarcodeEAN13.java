@@ -31,8 +31,10 @@ public class CBarcodeEAN13 extends ALinearBarcode
     protected CBarcodeEAN13(final CBarcodeEAN13 original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.EAN_13);
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.EAN_13; }
 
     @Override
     public AComponent clone() { return clone(false); }

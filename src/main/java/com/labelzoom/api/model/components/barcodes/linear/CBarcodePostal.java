@@ -39,13 +39,15 @@ public class CBarcodePostal extends ALinearBarcode implements IBarcodeWithWideTo
     protected CBarcodePostal(final CBarcodePostal original, final boolean cloneData)
     {
         super(original, cloneData);
-        setBarcodeStyle(BarcodeStyle.PostNet);
         if (original != null)
         {
             this.postalCodeType = original.postalCodeType;
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
     }
+
+    @Override
+    public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.PostNet; }
 
     @Override
     public AComponent clone() { return clone(false); }
