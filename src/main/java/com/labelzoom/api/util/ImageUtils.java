@@ -14,26 +14,34 @@ public class ImageUtils
     private static final int BLACK = Color.BLACK.getRGB();
     private static final int WHITE = Color.WHITE.getRGB();
 
-    /**
-     * Thanks, ChatGPT!
-     * @param image the source image
-     * @param luminanceThreshold luminance threshold
-     * @return the dithered 2-color image
-     */
-    public static BufferedImage desaturateWithDithering(final BufferedImage image, final int luminanceThreshold, final int alphaThreshold)
+    public static BufferedImage cloneImage(final BufferedImage image)
     {
         // Clone original image
         final ColorModel cm = image.getColorModel();
         final boolean isAlphaPreMultiplied = cm.isAlphaPremultiplied();
         final WritableRaster raster = image.copyData(null);
-        final BufferedImage out = new BufferedImage(cm, raster, isAlphaPreMultiplied, null);
+        return new BufferedImage(cm, raster, isAlphaPreMultiplied, null);
+    }
+
+    /**
+     * Thanks, ChatGPT!
+     * @param image the image to desaturate
+     * @param luminanceThreshold luminance threshold, 0.0 to 1.0
+     * @param alphaThreshold alpha threshold, 0.0 to 1.0
+     */
+    public static void desaturateWithDithering(final BufferedImage image, final float luminanceThreshold, final float alphaThreshold)
+    {
+        if (luminanceThreshold < 0 || luminanceThreshold > 1) throw new IllegalArgumentException("luminanceThreshold must be between 0.0 and 1.0 (inclusive)");
+        if (alphaThreshold < 0 || alphaThreshold > 1) throw new IllegalArgumentException("alphaThreshold must be between 0.0 and 1.0 (inclusive)");
+        final int luminanceByteThreshold = Math.round(255 * luminanceThreshold);
+        final int alphaByteThreshold = Math.round(255 * alphaThreshold);
 
         // Apply dithering
-        final int width = out.getWidth();
-        final int height = out.getHeight();
+        final int width = image.getWidth();
+        final int height = image.getHeight();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                final int pixel = out.getRGB(x, y);
+                final int pixel = image.getRGB(x, y);
                 final int alpha = (pixel >> 24) & 0xff;
                 final int red = (pixel >> 16) & 0xff;
                 final int green = (pixel >> 8) & 0xff;
@@ -41,20 +49,19 @@ public class ImageUtils
 
                 // Convert to grayscale (or use other method to choose between color1 and color2)
                 final int gray = (int)(0.299 * red + 0.587 * green + 0.114 * blue);
-                final int newPixel = gray <= luminanceThreshold && alpha >= alphaThreshold ? BLACK : WHITE;
+                final int newPixel = gray <= luminanceByteThreshold && alpha >= alphaByteThreshold ? BLACK : WHITE;
 
                 final int error = gray - ((newPixel == BLACK) ? 0 : 255);
 
                 // Distribute the error to neighboring pixels
-                if (x < width - 1) out.setRGB(x + 1, y, applyError(out.getRGB(x + 1, y), Math.round(error * ERROR_SEVEN_SIXTEENTHS)));
-                if (x > 0 && y < height - 1) out.setRGB(x - 1, y + 1, applyError(out.getRGB(x - 1, y + 1), Math.round(error * ERROR_THREE_SIXTEENTHS)));
-                if (y < height - 1) out.setRGB(x, y + 1, applyError(out.getRGB(x, y + 1), Math.round(error * ERROR_FIVE_SIXTEENTHS)));
-                if (x < width - 1 && y < height - 1) out.setRGB(x + 1, y + 1, applyError(out.getRGB(x + 1, y + 1), Math.round(error * ERROR_ONE_SIXTEENTH)));
+                if (x < width - 1) image.setRGB(x + 1, y, applyError(image.getRGB(x + 1, y), Math.round(error * ERROR_SEVEN_SIXTEENTHS)));
+                if (x > 0 && y < height - 1) image.setRGB(x - 1, y + 1, applyError(image.getRGB(x - 1, y + 1), Math.round(error * ERROR_THREE_SIXTEENTHS)));
+                if (y < height - 1) image.setRGB(x, y + 1, applyError(image.getRGB(x, y + 1), Math.round(error * ERROR_FIVE_SIXTEENTHS)));
+                if (x < width - 1 && y < height - 1) image.setRGB(x + 1, y + 1, applyError(image.getRGB(x + 1, y + 1), Math.round(error * ERROR_ONE_SIXTEENTH)));
 
-                out.setRGB(x, y, newPixel);
+                image.setRGB(x, y, newPixel);
             }
         }
-        return out;
     }
 
     private static int applyError(int pixel, int error) {
@@ -64,25 +71,34 @@ public class ImageUtils
         return (pixel & 0xff000000) | (red << 16) | (green << 8) | blue;
     }
 
-    public static BufferedImage desaturateWithHardCut(final BufferedImage image, final int luminanceThreshold, final int alphaThreshold)
+    /**
+     *
+     * @param image the image to desaturate
+     * @param luminanceThreshold luminance threshold, 0.0 to 1.0
+     * @param alphaThreshold alpha threshold, 0.0 to 1.0
+     */
+    public static void desaturateWithHardCut(final BufferedImage image, final float luminanceThreshold, final float alphaThreshold)
     {
-        final BufferedImage out = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        if (luminanceThreshold < 0 || luminanceThreshold > 1) throw new IllegalArgumentException("luminanceThreshold must be between 0.0 and 1.0 (inclusive)");
+        if (alphaThreshold < 0 || alphaThreshold > 1) throw new IllegalArgumentException("alphaThreshold must be between 0.0 and 1.0 (inclusive)");
+        final int luminanceByteThreshold = Math.round(255 * luminanceThreshold);
+        final int alphaByteThreshold = Math.round(255 * alphaThreshold);
+
         for (int y = 0; y < image.getHeight(); y++)
         {
             for (int x = 0; x < image.getWidth(); x++)
             {
                 final Color pixelColor = new Color(image.getRGB(x, y), true);
                 final float luminance = HSLColor.fromRGB(pixelColor)[2];
-                if (pixelColor.getAlpha() >= alphaThreshold && luminance <= luminanceThreshold)
+                if (pixelColor.getAlpha() >= alphaByteThreshold && luminance <= luminanceByteThreshold)
                 {
-                    out.setRGB(x, y, BLACK);
+                    image.setRGB(x, y, BLACK);
                 }
                 else
                 {
-                    out.setRGB(x, y, WHITE);
+                    image.setRGB(x, y, WHITE);
                 }
             }
         }
-        return out;
     }
 }
