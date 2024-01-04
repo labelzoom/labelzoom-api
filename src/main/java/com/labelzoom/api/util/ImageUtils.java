@@ -101,4 +101,39 @@ public class ImageUtils
             }
         }
     }
+
+    /**
+     *
+     * @param originalImage the image to desaturate
+     * @param luminanceThreshold luminance threshold, 0.0 to 1.0
+     * @param alphaThreshold alpha threshold, 0.0 to 1.0
+     * @return the bi-tonal image
+     */
+    public static BufferedImage toBlackAndWhite(final BufferedImage originalImage, final float luminanceThreshold, final float alphaThreshold)
+    {
+        if (luminanceThreshold < 0 || luminanceThreshold > 1) throw new IllegalArgumentException("luminanceThreshold must be between 0.0 and 1.0 (inclusive)");
+        if (alphaThreshold < 0 || alphaThreshold > 1) throw new IllegalArgumentException("alphaThreshold must be between 0.0 and 1.0 (inclusive)");
+        final int luminanceByteThreshold = Math.round(255 * luminanceThreshold);
+        final int alphaByteThreshold = Math.round(255 * alphaThreshold);
+
+        final BufferedImage binaryImage = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+        for (int y = 0; y < originalImage.getHeight(); y++)
+        {
+            for (int x = 0; x < originalImage.getWidth(); x++)
+            {
+                final Color pixelColor = new Color(originalImage.getRGB(x, y), true);
+                final float luminance = HSLColor.fromRGB(pixelColor)[2];
+                if (pixelColor.getAlpha() >= alphaByteThreshold && luminance <= luminanceByteThreshold)
+                {
+                    binaryImage.setRGB(x, y, BLACK);
+                }
+                else
+                {
+                    binaryImage.setRGB(x, y, WHITE);
+                }
+            }
+        }
+        return binaryImage;
+    }
 }
