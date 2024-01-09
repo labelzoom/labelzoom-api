@@ -1,6 +1,6 @@
 package com.labelzoom.api.model.components.barcodes.twod;
 
-/* Copyright (C) 2021, LabelZoom, a subsidiary of RJF Technology Solutions, Inc.
+/* Copyright (C) 2024, LabelZoom, a subsidiary of RJF Technology Solutions LLC.
  * All rights reserved.  Proprietary and confidential.
  *
  * This file is subject to the license terms found at
