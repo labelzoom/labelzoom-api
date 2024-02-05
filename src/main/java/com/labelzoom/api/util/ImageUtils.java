@@ -136,4 +136,61 @@ public class ImageUtils
         }
         return binaryImage;
     }
+
+    /**
+     * Returns true or false depending on whether the image has color or gray. This can be used for selective dithering
+     * @param image the image to scan
+     * @param toleranceFactor tolerance, 0.0 to 1.0
+     * @return true if image contains colors or grays, false if image is black and white
+     */
+    public static boolean imageHasColorOrGray(final BufferedImage image, final float toleranceFactor)
+    {
+        if (toleranceFactor < 0 || toleranceFactor >= 1) throw new IllegalArgumentException("tolerance must be between 0.0 (inclusive) and 1.0 (exclusive)");
+        final int tolerance = Math.round(255 * toleranceFactor);
+        long colorPixels = 0;
+        final long totalPixels = (long) image.getWidth() * image.getHeight();
+
+        for (int x = 0; x < image.getWidth(); x++)
+        {
+            for (int y = 0; y < image.getHeight(); y++)
+            {
+                final int pixel = image.getRGB(x, y);
+                final int alpha = (pixel >> 24) & 0xff;
+                final float alphaFactor = alpha / 255f;
+                final int red = blendWithWhite(alphaFactor, (pixel >> 16) & 0xff);
+                final int green = blendWithWhite(alphaFactor, (pixel >> 8) & 0xff);
+                final int blue = blendWithWhite(alphaFactor, pixel & 0xff);
+
+                final int max = Math.max(Math.max(red, green), blue);
+                final int min = Math.min(Math.min(red, green), blue);
+                final boolean isGrayscale = (max - min) <= tolerance;
+
+                if (!isGrayscale)
+                {
+                    colorPixels++;
+                }
+                else
+                {
+                    if (min >= tolerance && max <= (255 - tolerance))
+                    {
+                        colorPixels++;
+                    }
+                }
+            }
+        }
+
+        // Define your criteria for "colorful"
+        return colorPixels > totalPixels * 0.05; // Example: more than 5% color pixels
+    }
+
+    /**
+     * Blend ARGB pixel with white
+     * @param alphaFactor tolerance, 0.0 to 1.0
+     * @param color ARGB color value
+     * @return RGB color value
+     */
+    private static int blendWithWhite(final float alphaFactor, final int color)
+    {
+        return (int)(alphaFactor * color + (1 - alphaFactor) * 255);
+    }
 }
