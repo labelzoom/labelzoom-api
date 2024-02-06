@@ -81,7 +81,7 @@ public class ImageUtils
     {
         if (luminanceThreshold < 0 || luminanceThreshold > 1) throw new IllegalArgumentException("luminanceThreshold must be between 0.0 and 1.0 (inclusive)");
         if (alphaThreshold < 0 || alphaThreshold > 1) throw new IllegalArgumentException("alphaThreshold must be between 0.0 and 1.0 (inclusive)");
-        final int luminanceByteThreshold = Math.round(255 * luminanceThreshold);
+        final int luminanceByteThreshold = Math.round(100 * luminanceThreshold);
         final int alphaByteThreshold = Math.round(255 * alphaThreshold);
 
         for (int y = 0; y < image.getHeight(); y++)
