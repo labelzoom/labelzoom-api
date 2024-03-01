@@ -4,6 +4,7 @@
 
 [![Build Status](https://github.com/labelzoom/labelzoom-api/actions/workflows/gradle-build.yml/badge.svg?branch=main)](https://github.com/labelzoom/labelzoom-api/actions?query=branch%3Amain)
 [![Release](https://img.shields.io/github/release/labelzoom/labelzoom-api.svg?style=flat-square)](https://github.com/labelzoom/labelzoom-api/releases)
+[![codecov](https://codecov.io/gh/labelzoom/labelzoom-api/graph/badge.svg?token=EGWAU0RMON)](https://codecov.io/gh/labelzoom/labelzoom-api)
 
 The LabelZoom API is the foundation on which all of LabelZoom's products and services are built. The API serves to define the following:
 - **Data model:** [/src/main/java/com/labelzoom/api/model](/src/main/java/com/labelzoom/api/model) - The data model of a LabelZoom label and associated components
