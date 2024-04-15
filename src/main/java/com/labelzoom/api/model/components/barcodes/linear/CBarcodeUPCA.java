@@ -23,7 +23,8 @@ import lombok.Setter;
 @Getter @Setter
 public class CBarcodeUPCA extends ALinearBarcode implements IBarcodeWithCheckDigit
 {
-    private boolean checkDigitEnabled = false;
+    private boolean checkDigitEnabled = true;
+
     /**
      * Parameterless constructor
      */
