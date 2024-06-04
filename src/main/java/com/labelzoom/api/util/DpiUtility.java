@@ -34,7 +34,7 @@ public class DpiUtility
 
     private float applyResize(final float sourceValue)
     {
-        return (float)(((double)sourceValue) * scalingFactor);
+        return (float)(sourceValue * scalingFactor);
     }
 
     private int applyResize(final int sourceValue)
@@ -44,7 +44,7 @@ public class DpiUtility
 
     private float applyFontResize(final float sourceValue)
     {
-        return (float)(((double)sourceValue) * fontScalingFactor);
+        return (float)(sourceValue * fontScalingFactor);
     }
 
     public CLabel resizeLabel(final CLabel label)

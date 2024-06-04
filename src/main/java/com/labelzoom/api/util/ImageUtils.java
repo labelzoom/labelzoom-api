@@ -14,6 +14,8 @@ public class ImageUtils
     private static final int BLACK = Color.BLACK.getRGB();
     private static final int WHITE = Color.WHITE.getRGB();
 
+    private ImageUtils() {}
+
     public static BufferedImage cloneImage(final BufferedImage image)
     {
         // Clone original image

@@ -71,7 +71,7 @@ public abstract class ABarcode extends AComponent implements IDynamicField
     /**
      * Parameterless constructor
      */
-    public ABarcode() { this(null, false); }
+    protected ABarcode() { this(null, false); }
 
     /**
      * Cloning constructor

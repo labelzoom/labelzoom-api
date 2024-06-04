@@ -23,6 +23,8 @@ import java.awt.image.BufferedImage;
 
 public class RotationUtility
 {
+    private RotationUtility() {}
+
     public static int normalizeRotation(float degrees) { return normalizeRotation(Math.round(degrees)); }
 
     public static int normalizeRotation(int degrees)

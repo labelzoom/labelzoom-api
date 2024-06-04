@@ -15,7 +15,6 @@ package com.labelzoom.api.model.components;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -26,7 +25,7 @@ public abstract class AContainer extends AComponent
     /**
      * Parameterless constructor
      */
-    public AContainer() { this(null); }
+    protected AContainer() { this(null); }
 
     /**
      * Cloning constructor

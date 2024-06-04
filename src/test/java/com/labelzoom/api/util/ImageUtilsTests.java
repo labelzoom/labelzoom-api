@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ImageUtilsTests
+class ImageUtilsTests
 {
     private final float DEFAULT_TOLERANCE = 0.1f;
 

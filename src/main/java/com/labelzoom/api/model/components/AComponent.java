@@ -41,7 +41,7 @@ public abstract class AComponent implements Cloneable {
     /**
      * Parameterless constructor
      */
-    public AComponent() { this(null); }
+    protected AComponent() { this(null); }
 
     /**
      * Cloning constructor

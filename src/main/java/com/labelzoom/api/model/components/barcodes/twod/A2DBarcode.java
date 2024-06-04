@@ -19,7 +19,7 @@ import com.labelzoom.api.model.components.barcodes.ABarcode;
  */
 public abstract class A2DBarcode extends ABarcode
 {
-	public A2DBarcode() { this(null, false); }
+	protected A2DBarcode() { this(null, false); }
 
 	protected A2DBarcode(final A2DBarcode original, final boolean cloneData)
 	{

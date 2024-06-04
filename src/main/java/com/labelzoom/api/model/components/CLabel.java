@@ -130,10 +130,7 @@ public class CLabel
                 }
             }
         }
-        if (!layerMap.containsKey(DEFAULT_LAYER_NAME))
-        {
-            layerMap.put(DEFAULT_LAYER_NAME, new CLayer(DEFAULT_LAYER_NAME));
-        }
+        layerMap.computeIfAbsent(DEFAULT_LAYER_NAME, CLayer::new);
         return layerMap;
     }
 

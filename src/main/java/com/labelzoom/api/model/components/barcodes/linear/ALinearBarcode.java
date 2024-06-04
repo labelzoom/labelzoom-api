@@ -40,7 +40,7 @@ public abstract class ALinearBarcode extends ABarcode implements IBarcodeWithMod
 	/**
 	 * Parameterless constructor
 	 */
-	public ALinearBarcode() { this(null, false); }
+	protected ALinearBarcode() { this(null, false); }
 
 	/**
 	 * Cloning constructor

@@ -13,7 +13,6 @@ package com.labelzoom.api.model.components.barcodes.twod;
  */
 
 import com.labelzoom.api.model.components.AComponent;
-import com.labelzoom.api.model.components.barcodes.ABarcode;
 import lombok.Getter;
 import lombok.Setter;
 

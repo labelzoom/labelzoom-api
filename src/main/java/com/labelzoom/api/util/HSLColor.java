@@ -235,13 +235,7 @@ public class HSLColor
 
     public String toString()
     {
-        String toString =
-                "HSLColor[h=" + hsl[0] +
-                        ",s=" + hsl[1] +
-                        ",l=" + hsl[2] +
-                        ",alpha=" + alpha + "]";
-
-        return toString;
+        return String.format("HSLColor[h=%f,s=%f,l=%f,alpha=%f]", hsl[0], hsl[1], hsl[2], alpha);
     }
 
     /**

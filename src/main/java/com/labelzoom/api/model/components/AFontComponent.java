@@ -29,7 +29,7 @@ public abstract class AFontComponent extends AComponent
     /**
      * Parameterless constructor
      */
-    public AFontComponent() { this(null); }
+    protected AFontComponent() { this(null); }
 
     /**
      * Cloning constructor
