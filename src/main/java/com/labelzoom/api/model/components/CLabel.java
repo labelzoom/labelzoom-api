@@ -199,4 +199,9 @@ public class CLabel
         else if (!c1.isReverse() && c2.isReverse()) return -1;
         return Integer.compare(this.getElements().indexOf(c1), this.getElements().indexOf(c2));
     };
+
+    public int getDpi()
+    {
+        return isHighRes ? 1000 : 100;
+    }
 }
