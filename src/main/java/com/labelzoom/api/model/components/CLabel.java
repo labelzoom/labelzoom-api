@@ -27,7 +27,7 @@ public class CLabel
     private int height;
 
     @Getter @Setter
-    private boolean isHighRes = false;
+    private int dpi = 100;
 
     @Getter @Setter
     private PageOrientation orientation = PageOrientation.Portrait;
@@ -82,7 +82,7 @@ public class CLabel
         {
             width = original.getWidth();
             height = original.getHeight();
-            isHighRes = original.isHighRes();
+            dpi = original.getDpi();
             orientation = original.getOrientation();
             if (original.getLayers() != null)
             {
@@ -107,6 +107,9 @@ public class CLabel
             id = original.id;
         }
     }
+
+    public boolean isHighRes() { return dpi >= 1000; }
+    public void setHighRes(final boolean isHighRes) { dpi = isHighRes ? 1000 : 100; }
 
     public void setElements(final List<AComponent> elements) { getLayerMap().get(DEFAULT_LAYER_NAME).setElements(elements); } // TODO: Multi-layer support
     public List<AComponent> getElements() { return getLayerMap().get(DEFAULT_LAYER_NAME).getElements(); } // TODO: Multi-layer support
@@ -199,9 +202,4 @@ public class CLabel
         else if (!c1.isReverse() && c2.isReverse()) return -1;
         return Integer.compare(this.getElements().indexOf(c1), this.getElements().indexOf(c2));
     };
-
-    public int getDpi()
-    {
-        return isHighRes ? 1000 : 100;
-    }
 }
