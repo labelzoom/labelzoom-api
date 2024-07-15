@@ -13,6 +13,7 @@ public class ImageUtils
     private static final float ERROR_SEVEN_SIXTEENTHS = 7f/16f;
     private static final int BLACK = Color.BLACK.getRGB();
     private static final int WHITE = Color.WHITE.getRGB();
+    private static final int TRANSPARENT = new Color(0, 0, 0, 0).getRGB();
 
     private ImageUtils() {}
 
@@ -51,7 +52,15 @@ public class ImageUtils
 
                 // Convert to grayscale (or use other method to choose between color1 and color2)
                 final int gray = (int)(0.299 * red + 0.587 * green + 0.114 * blue);
-                final int newPixel = gray <= luminanceByteThreshold && alpha >= alphaByteThreshold ? BLACK : WHITE;
+                final int newPixel;
+                if (alpha >= alphaByteThreshold)
+                {
+                     newPixel = gray <= luminanceByteThreshold ? BLACK : WHITE;
+                }
+                else
+                {
+                    newPixel = TRANSPARENT;
+                }
 
                 final int error = gray - ((newPixel == BLACK) ? 0 : 255);
 
@@ -92,13 +101,13 @@ public class ImageUtils
             {
                 final Color pixelColor = new Color(image.getRGB(x, y), true);
                 final float luminance = HSLColor.fromRGB(pixelColor)[2];
-                if (pixelColor.getAlpha() >= alphaByteThreshold && luminance <= luminanceByteThreshold)
+                if (pixelColor.getAlpha() >= alphaByteThreshold)
                 {
-                    image.setRGB(x, y, BLACK);
+                    image.setRGB(x, y, luminance <= luminanceByteThreshold ? BLACK : WHITE);
                 }
                 else
                 {
-                    image.setRGB(x, y, WHITE);
+                    image.setRGB(x, y, TRANSPARENT);
                 }
             }
         }
