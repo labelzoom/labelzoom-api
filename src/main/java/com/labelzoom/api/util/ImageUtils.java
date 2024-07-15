@@ -13,7 +13,7 @@ public class ImageUtils
     private static final float ERROR_SEVEN_SIXTEENTHS = 7f/16f;
     private static final int BLACK = Color.BLACK.getRGB();
     private static final int WHITE = Color.WHITE.getRGB();
-    private static final int TRANSPARENT = new Color(0, 0, 0, 0).getRGB();
+    private static final int TRANSPARENT = new Color(255, 255, 255, 0).getRGB();
 
     private ImageUtils() {}
 
