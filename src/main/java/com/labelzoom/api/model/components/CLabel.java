@@ -21,6 +21,12 @@ public class CLabel
 {
     // Fields
     @Getter @Setter
+    private String name;
+
+    @Getter @Setter
+    private String description;
+
+    @Getter @Setter
     private int width;
 
     @Getter @Setter
@@ -80,6 +86,8 @@ public class CLabel
         super();
         if (original != null)
         {
+            name = original.getName();
+            description = original.getDescription();
             width = original.getWidth();
             height = original.getHeight();
             dpi = original.getDpi();
