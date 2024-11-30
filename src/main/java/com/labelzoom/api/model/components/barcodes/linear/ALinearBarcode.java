@@ -25,8 +25,6 @@ public abstract class ALinearBarcode extends ABarcode implements IBarcodeWithMod
 {
 	private ZebraBarcodeSize barcodeSize = ZebraBarcodeSize.Normal;
 
-	private int height;
-
 	private boolean humanReadableEnabled;
 
 	private HumanReadableStyle humanReadablePosition;
@@ -52,7 +50,6 @@ public abstract class ALinearBarcode extends ABarcode implements IBarcodeWithMod
 		if (original != null)
 		{
 			barcodeSize = original.barcodeSize;
-			height = original.height;
 			humanReadableEnabled = original.humanReadableEnabled;
 			humanReadablePosition = original.humanReadablePosition;
 		}

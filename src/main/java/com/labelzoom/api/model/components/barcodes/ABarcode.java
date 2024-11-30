@@ -27,6 +27,8 @@ public abstract class ABarcode extends AComponent implements IDynamicField
 
     private String fieldValue;
 
+    private Integer height;
+
     private boolean blankWhenNull = false;
 
     @Getter
@@ -84,6 +86,7 @@ public abstract class ABarcode extends AComponent implements IDynamicField
         {
             expression = original.expression;
             blankWhenNull = original.blankWhenNull;
+            height = original.height;
             if (cloneData)
             {
                 fieldValue = original.fieldValue;
