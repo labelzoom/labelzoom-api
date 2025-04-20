@@ -26,9 +26,9 @@ public class CBarcodeDataMatrix extends A2DBarcode
 
 	private int quality = 0; // 0, 50, 80, 100, 140, 200
 
-	private int columns = 9; // 9 to 49
+	private Integer columns; // 9 to 49
 
-	private int rows = 9; // 9 to 49
+	private Integer rows; // 9 to 49
 
 	private int formatId = 6;
 
