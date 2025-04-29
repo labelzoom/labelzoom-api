@@ -27,9 +27,9 @@ public class CBarcodePDF417 extends A2DBarcode implements IBarcodeWithModuleWidt
 
 	private int securityLevel = 0;
 
-	private int columns = 1;
+	private Integer columns;
 
-	private int rows = 3;
+	private Integer rows;
 
 	private boolean truncateRightRow = false;
 
