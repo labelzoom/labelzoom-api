@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
     testImplementation 'org.reflections:reflections:0.10.2'
     testImplementation 'uk.co.jemos.podam:podam:8.0.2.RELEASE'
 }
