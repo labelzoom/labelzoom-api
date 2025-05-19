@@ -17,8 +17,13 @@ import com.labelzoom.api.model.PositioningMode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
-public abstract class AComponent implements Cloneable {
+public abstract class AComponent implements Cloneable
+{
+    @Setter
+    private UUID id = UUID.randomUUID();
 
     @Setter
     private int left;
@@ -52,6 +57,7 @@ public abstract class AComponent implements Cloneable {
         super();
         if (original != null)
         {
+            this.id = original.id;
             this.left = original.left;
             this.top = original.top;
             this.rotation = original.rotation;
