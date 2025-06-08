@@ -55,6 +55,18 @@ public class CLabel
     @Getter @Setter
     private UUID id = UUID.randomUUID();
 
+    @Getter @Setter
+    private float marginLeft = 0;
+
+    @Getter @Setter
+    private float marginTop = 0;
+
+    @Getter @Setter
+    private float marginRight = 0;
+
+    @Getter @Setter
+    private float marginBottom = 0;
+
     // Static/constants
     public static final String DEFAULT_LAYER_NAME = "background";
 
@@ -92,6 +104,10 @@ public class CLabel
             height = original.getHeight();
             dpi = original.getDpi();
             orientation = original.getOrientation();
+            marginLeft = original.marginLeft;
+            marginTop = original.marginTop;
+            marginRight = original.marginRight;
+            marginBottom = original.marginBottom;
             if (original.getLayers() != null)
             {
                 for (final CLayer layer : original.getLayers())
