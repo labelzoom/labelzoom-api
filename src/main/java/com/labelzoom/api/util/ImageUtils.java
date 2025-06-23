@@ -1,9 +1,7 @@
 package com.labelzoom.api.util;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
+import java.awt.image.*;
 
 public class ImageUtils
 {
@@ -15,9 +13,27 @@ public class ImageUtils
     private static final int WHITE = Color.WHITE.getRGB();
     private static final int TRANSPARENT = new Color(255, 255, 255, 0).getRGB();
 
+    private static final IndexColorModel BLACK_AND_TRANSPARENT_COLOR_MODEL = new IndexColorModel(
+            1,
+            2,
+            new byte[] { (byte)0, (byte)0 },
+            new byte[] { (byte)0, (byte)0 },
+            new byte[] { (byte)0, (byte)0 },
+            new byte[] { (byte)0, (byte)255 }
+    );
+
+    private static final IndexColorModel BLACK_WHITE_AND_TRANSPARENT_COLOR_MODEL = new IndexColorModel(
+            2,
+            3,
+            new byte[] { (byte)0, (byte)255, (byte)0 },
+            new byte[] { (byte)0, (byte)255, (byte)0 },
+            new byte[] { (byte)0, (byte)255, (byte)0 },
+            new byte[] { (byte)0, (byte)255, (byte)255 }
+    );
+
     private ImageUtils() {}
 
-    public static BufferedImage cloneImage(final BufferedImage image)
+    public static BufferedImage cloneImage(final RenderedImage image)
     {
         // Clone original image
         final ColorModel cm = image.getColorModel();
@@ -127,7 +143,7 @@ public class ImageUtils
         final int luminanceByteThreshold = Math.round(255 * luminanceThreshold);
         final int alphaByteThreshold = Math.round(255 * alphaThreshold);
 
-        final BufferedImage binaryImage = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        final BufferedImage binaryImage = createBlackAndWhiteImage(originalImage.getWidth(), originalImage.getHeight());
 
         for (int y = 0; y < originalImage.getHeight(); y++)
         {
@@ -203,5 +219,20 @@ public class ImageUtils
     private static int blendWithWhite(final float alphaFactor, final int color)
     {
         return (int)(alphaFactor * color + (1 - alphaFactor) * 255);
+    }
+
+    public static BufferedImage createBlackAndTransparentImage(final int width, final int height)
+    {
+        return new BufferedImage(width, height, BufferedImage.TYPE_BYTE_INDEXED, BLACK_AND_TRANSPARENT_COLOR_MODEL);
+    }
+
+    public static BufferedImage createBlackWhiteAndTransparentImage(final int width, final int height)
+    {
+        return new BufferedImage(width, height, BufferedImage.TYPE_BYTE_INDEXED, BLACK_WHITE_AND_TRANSPARENT_COLOR_MODEL);
+    }
+
+    public static BufferedImage createBlackAndWhiteImage(final int width, final int height)
+    {
+        return new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
     }
 }

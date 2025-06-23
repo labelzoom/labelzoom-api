@@ -20,6 +20,8 @@ import com.labelzoom.api.model.components.barcodes.linear.ALinearBarcode;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 
 public class RotationUtility
 {
@@ -136,11 +138,14 @@ public class RotationUtility
         final double rads = Math.toRadians(degrees);
         final double sin = Math.abs(Math.sin(rads));
         final double cos = Math.abs(Math.cos(rads));
-        final int w = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
-        final int h = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
-        final BufferedImage rotatedImage = new BufferedImage(w, h, image.getType());
+        final int newWidth = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
+        final int newHeight = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
+        final ColorModel cm = image.getColorModel();
+        final boolean isAlphaPreMultiplied = cm.isAlphaPremultiplied();
+        final WritableRaster raster = cm.createCompatibleWritableRaster(newWidth, newHeight);
+        final BufferedImage rotatedImage = new BufferedImage(cm, raster, isAlphaPreMultiplied, null);
         final AffineTransform at = new AffineTransform();
-        at.translate(w * 0.5d, h * 0.5d);
+        at.translate(newWidth * 0.5d, newHeight * 0.5d);
         at.rotate(rads,0, 0);
         at.translate(-image.getWidth() * 0.5d, -image.getHeight() * 0.5d);
         final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);

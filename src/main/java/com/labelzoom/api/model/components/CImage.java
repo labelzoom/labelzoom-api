@@ -12,11 +12,13 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
+import com.labelzoom.api.util.ImageUtils;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 @Getter @Setter
 public class CImage extends AComponent
@@ -67,6 +69,10 @@ public class CImage extends AComponent
         if (img instanceof BufferedImage)
         {
             return (BufferedImage) img;
+        }
+        else if (img instanceof RenderedImage)
+        {
+            return ImageUtils.cloneImage((RenderedImage) img);
         }
 
         final BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
