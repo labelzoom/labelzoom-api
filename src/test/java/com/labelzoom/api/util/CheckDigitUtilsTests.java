@@ -14,4 +14,7 @@ class CheckDigitUtilsTests
 
     @Test
     void testCode128Example() { assertEquals(8, CheckDigitUtils.getCheckDigit("0008100887950411637", CheckDigitUtils.CheckDigitType.MOD10)); }
+
+    @Test
+    void testZeroCase() { assertEquals(0, CheckDigitUtils.getCheckDigit("0028179150205445698", CheckDigitUtils.CheckDigitType.MOD10)); }
 }
