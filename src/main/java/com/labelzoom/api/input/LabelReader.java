@@ -2,9 +2,7 @@ package com.labelzoom.api.input;
 
 import com.labelzoom.api.model.components.CLabel;
 
-import java.util.List;
-
-public interface LabelReader<E> extends GenericReader<List<CLabel>, E>
+public interface LabelReader<E> extends GenericReader<Iterable<CLabel>, E>
 {
-    List<CLabel> read(E in);
+    Iterable<CLabel> read(E in);
 }
