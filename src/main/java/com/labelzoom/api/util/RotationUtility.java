@@ -138,8 +138,31 @@ public class RotationUtility
         final double rads = Math.toRadians(degrees);
         final double sin = Math.abs(Math.sin(rads));
         final double cos = Math.abs(Math.cos(rads));
-        final int newWidth = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
-        final int newHeight = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
+        final int newWidth = (int) Math.ceil(image.getWidth() * cos + image.getHeight() * sin);
+        final int newHeight = (int) Math.ceil(image.getHeight() * cos + image.getWidth() * sin);
+        final BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, image.getType());
+        final AffineTransform at = new AffineTransform();
+        at.translate(newWidth * 0.5d, newHeight * 0.5d);
+        at.rotate(rads,0, 0);
+        at.translate(-image.getWidth() * 0.5d, -image.getHeight() * 0.5d);
+        final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+        rotateOp.filter(image, rotatedImage);
+        return rotatedImage;
+    }
+
+    /**
+     *
+     * @param image the image to rotate
+     * @param degrees number of degrees to rotate
+     * @return the rotated image
+     */
+    public static BufferedImage rotateImageAndPreserveColorModel(final BufferedImage image, int degrees)
+    {
+        final double rads = Math.toRadians(degrees);
+        final double sin = Math.abs(Math.sin(rads));
+        final double cos = Math.abs(Math.cos(rads));
+        final int newWidth = (int) Math.ceil(image.getWidth() * cos + image.getHeight() * sin);
+        final int newHeight = (int) Math.ceil(image.getHeight() * cos + image.getWidth() * sin);
         final ColorModel cm = image.getColorModel();
         final boolean isAlphaPreMultiplied = cm.isAlphaPremultiplied();
         final WritableRaster raster = cm.createCompatibleWritableRaster(newWidth, newHeight);
