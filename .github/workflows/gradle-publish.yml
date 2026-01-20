@@ -37,10 +37,11 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Build with Gradle
+    - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v4
-      with:
-        arguments: build
+
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -52,9 +53,7 @@ jobs:
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
     - name: Publish to GitHub Packages
-      uses: gradle/actions/setup-gradle@v4
-      with:
-        arguments: publish
+      run: ./gradlew publish
       env:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -46,10 +46,11 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x ./gradlew
 
-    - name: Build with Gradle
+    - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v4
-      with:
-        arguments: build
+
+    - name: Build with Gradle
+      run: ./gradlew build
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
