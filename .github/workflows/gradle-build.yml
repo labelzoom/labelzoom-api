@@ -21,7 +21,7 @@ concurrency:
 permissions:
   contents: read
   checks: write  # For test result publishing
-  id-token: write  # For OIDC authentication with Codecov
+  pull-requests: write  # For commenting on PRs
 
 jobs:
   build:
