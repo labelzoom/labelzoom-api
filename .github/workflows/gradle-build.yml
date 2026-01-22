@@ -22,6 +22,7 @@ permissions:
   contents: read
   checks: write  # For test result publishing
   pull-requests: write  # For commenting on PRs
+  id-token: write # For Codecov
 
 jobs:
   build:
@@ -63,7 +64,7 @@ jobs:
       uses: codecov/codecov-action@v5
       if: (!cancelled())
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+        use_oidc: true
         slug: labelzoom/labelzoom-api
         fail_ci_if_error: false
         verbose: true
