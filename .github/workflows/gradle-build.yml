@@ -66,4 +66,3 @@ jobs:
         use_oidc: true
         slug: labelzoom/labelzoom-api
         fail_ci_if_error: false
-        verbose: true
