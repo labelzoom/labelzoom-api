@@ -140,7 +140,10 @@ public class RotationUtility
         final double cos = Math.abs(Math.cos(rads));
         final int newWidth = (int) Math.ceil(image.getWidth() * cos + image.getHeight() * sin);
         final int newHeight = (int) Math.ceil(image.getHeight() * cos + image.getWidth() * sin);
-        final BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, image.getType());
+        final int imageType = image.getType() == BufferedImage.TYPE_CUSTOM
+                ? (image.getColorModel().hasAlpha() ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB)
+                : image.getType();
+        final BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, imageType);
         final AffineTransform at = new AffineTransform();
         at.translate(newWidth * 0.5d, newHeight * 0.5d);
         at.rotate(rads,0, 0);
