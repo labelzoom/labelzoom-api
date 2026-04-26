@@ -66,6 +66,7 @@ public class DpiUtility
             {
                 final AFontComponent fontComponent = (AFontComponent)component;
                 fontComponent.setFontSize(applyFontResize(fontComponent.getFontSize()));
+                fontComponent.setHorizontalScaling(applyFontResize(fontComponent.getHorizontalScaling()));
                 if (fontComponent instanceof CVariableText)
                 {
                     final CVariableText variableText = (CVariableText) fontComponent;
