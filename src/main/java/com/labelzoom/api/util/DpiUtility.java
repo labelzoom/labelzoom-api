@@ -25,11 +25,13 @@ public class DpiUtility
 
     private final double scalingFactor;
     private final double fontScalingFactor;
+    private final boolean scaleFontHorizontalScaling;
 
     public DpiUtility(final int sourceDpi, final int targetDpi, final int sourceFontDpi, final int targetFontDpi)
     {
         this.scalingFactor = (double)targetDpi / (double)sourceDpi;
         this.fontScalingFactor = (double)targetFontDpi / (double)sourceFontDpi;
+        this.scaleFontHorizontalScaling = sourceFontDpi == sourceDpi && targetFontDpi == targetDpi;
     }
 
     private float applyResize(final float sourceValue)
@@ -66,7 +68,10 @@ public class DpiUtility
             {
                 final AFontComponent fontComponent = (AFontComponent)component;
                 fontComponent.setFontSize(applyFontResize(fontComponent.getFontSize()));
-                fontComponent.setHorizontalScaling(applyFontResize(fontComponent.getHorizontalScaling()));
+                if (scaleFontHorizontalScaling)
+                {
+                    fontComponent.setHorizontalScaling(applyFontResize(fontComponent.getHorizontalScaling()));
+                }
                 if (fontComponent instanceof CVariableText)
                 {
                     final CVariableText variableText = (CVariableText) fontComponent;
