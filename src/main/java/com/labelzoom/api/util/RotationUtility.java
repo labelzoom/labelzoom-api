@@ -17,6 +17,8 @@ import com.labelzoom.api.model.components.AFontComponent;
 import com.labelzoom.api.model.components.CLabel;
 import com.labelzoom.api.model.components.barcodes.linear.ALinearBarcode;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -140,16 +142,22 @@ public class RotationUtility
         final double cos = Math.abs(Math.cos(rads));
         final int newWidth = (int) Math.ceil(image.getWidth() * cos + image.getHeight() * sin);
         final int newHeight = (int) Math.ceil(image.getHeight() * cos + image.getWidth() * sin);
-        final int imageType = image.getType() == BufferedImage.TYPE_CUSTOM
-                ? (image.getColorModel().hasAlpha() ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB)
-                : image.getType();
+        final int imageType = image.getColorModel().hasAlpha() ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
         final BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, imageType);
         final AffineTransform at = new AffineTransform();
         at.translate(newWidth * 0.5d, newHeight * 0.5d);
         at.rotate(rads,0, 0);
         at.translate(-image.getWidth() * 0.5d, -image.getHeight() * 0.5d);
-        final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        rotateOp.filter(image, rotatedImage);
+        final Graphics2D graphics2D = rotatedImage.createGraphics();
+        try
+        {
+            graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            graphics2D.drawImage(image, at, null);
+        }
+        finally
+        {
+            graphics2D.dispose();
+        }
         return rotatedImage;
     }
 
