@@ -97,6 +97,13 @@ public class DpiUtility
                 rectangle.setHeight(applyResize(rectangle.getHeight()));
                 rectangle.setThickness(applyResize(rectangle.getThickness()));
             }
+            else if (component instanceof CDiagonalLine)
+            {
+                final CDiagonalLine diagonalLine = (CDiagonalLine)component;
+                diagonalLine.setWidth(applyResize(diagonalLine.getWidth()));
+                diagonalLine.setHeight(applyResize(diagonalLine.getHeight()));
+                diagonalLine.setThickness(Math.max(applyResize(diagonalLine.getThickness()), 1)); // We don't ever want thickness to be less than 1, otherwise it won't show up in the design tab
+            }
             else if (component instanceof CImage)
             {
                 final CImage image = (CImage)component;
