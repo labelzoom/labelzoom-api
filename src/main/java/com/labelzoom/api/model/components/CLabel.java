@@ -146,6 +146,10 @@ public class CLabel
         layers.clear();
         layers.add(layer);
     }
+
+    /**
+     * @return unmodifiable list of elements across all layers
+     */
     public List<AComponent> getElements()
     {
         return getLayerMap().values().stream()
