@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ImageUtilsTests
 {
-    private final float DEFAULT_TOLERANCE = 0.1f;
+    private static final float DEFAULT_TOLERANCE = 0.1f;
 
     @Test
     void testLabelZoomLogo_IsColorful() throws IOException

@@ -19,8 +19,6 @@ public class Stopwatch
     private long elapsedTime = 0L;
     private boolean isRunning = false;
 
-    public Stopwatch() { }
-
     public void start()
     {
         if (!isRunning)

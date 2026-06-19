@@ -55,19 +55,11 @@ public class CLayer
             {
                 for (AComponent component : original.elements)
                 {
-                    if (component instanceof IVariableField)
+                    switch (component)
                     {
-                        final IVariableField variableField = (IVariableField) component;
-                        elements.add(variableField.clone(cloneData));
-                    }
-                    else if (component instanceof IDynamicField)
-                    {
-                        final IDynamicField dynamicField = (IDynamicField) component;
-                        elements.add(dynamicField.clone(cloneData));
-                    }
-                    else
-                    {
-                        elements.add(component.clone());
+                        case IVariableField variableField -> elements.add(variableField.clone(cloneData));
+                        case IDynamicField dynamicField -> elements.add(dynamicField.clone(cloneData));
+                        default -> elements.add(component.clone());
                     }
                 }
             }

@@ -41,13 +41,14 @@ public class CBarcodeLogmars extends ALinearBarcode implements IBarcodeWithWideT
         {
             this.wideToNarrowRatio = original.wideToNarrowRatio;
         }
+        super.setHumanReadableEnabled(true);
     }
 
     @Override
     public BarcodeStyle getBarcodeStyle() { return BarcodeStyle.LOGMARS; }
 
     @Override
-    public void setHumanReadableEnabled(boolean value) {}
+    public void setHumanReadableEnabled(boolean value) { /* no-op; LOGMARS always shows human-readable section in ZPL */ }
     @Override
     public boolean isHumanReadableEnabled() { return true; }
 

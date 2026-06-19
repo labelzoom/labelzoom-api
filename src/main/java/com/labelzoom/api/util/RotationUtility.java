@@ -45,8 +45,6 @@ public class RotationUtility
             case -90:
                 rotateCounterClockwise(label);
                 return;
-            case 0:
-                return;
             case 90:
                 rotateClockwise(label);
                 break;
@@ -55,6 +53,8 @@ public class RotationUtility
                 break;
             case 270:
                 rotateClockwise(rotateClockwise(rotateClockwise(label)));
+                break;
+            default:
                 break;
         }
     }
@@ -104,14 +104,12 @@ public class RotationUtility
         for (AComponent component : label.getElements())
         {
             int yOffset = 0;
-            if (component instanceof ALinearBarcode)
+            if (component instanceof ALinearBarcode linearBarcode)
             {
-                ALinearBarcode linearBarcode = (ALinearBarcode)component;
                 yOffset = -linearBarcode.getHeight();
             }
-            else if (component instanceof AFontComponent)
+            else if (component instanceof AFontComponent fontComponent)
             {
-                AFontComponent fontComponent = (AFontComponent)component;
                 yOffset = -Math.round(fontComponent.getFontSize());
             }
             final int newX = component.getTop();

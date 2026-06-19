@@ -62,53 +62,50 @@ public class DpiUtility
         {
             component.setTop(applyResize(component.getTop()));
             component.setLeft(applyResize(component.getLeft()));
-            if (component instanceof AFontComponent)
+            switch (component)
             {
-                final AFontComponent fontComponent = (AFontComponent)component;
-                fontComponent.setFontSize(applyFontResize(fontComponent.getFontSize()));
-                if (fontComponent instanceof CVariableText)
+                case AFontComponent fontComponent ->
                 {
-                    final CVariableText variableText = (CVariableText) fontComponent;
-                    if (!variableText.isAutoSize())
+                    fontComponent.setFontSize(applyFontResize(fontComponent.getFontSize()));
+                    if (fontComponent instanceof CVariableText variableText && !variableText.isAutoSize())
                     {
                         variableText.setWidth(applyResize(variableText.getWidth()));
                         variableText.setHeight(applyResize(variableText.getHeight()));
                     }
                 }
-            }
-            else if (component instanceof ABarcode)
-            {
-                if (component instanceof ALinearBarcode)
+                case ABarcode aBarcode ->
                 {
-                    final ALinearBarcode linearBarcode = (ALinearBarcode)component;
-                    linearBarcode.setHeight(applyResize(linearBarcode.getHeight()));
+                    if (component instanceof ALinearBarcode linearBarcode)
+                    {
+                        linearBarcode.setHeight(applyResize(linearBarcode.getHeight()));
+                    }
                 }
-            }
-            else if (component instanceof CLine)
-            {
-                final CLine line = (CLine)component;
-                line.setLength(applyResize(line.getLength()));
-                line.setThickness(Math.max(applyResize(line.getThickness()), 1)); // We don't ever want thickness to be less than 1, otherwise it won't show up in the design tab
-            }
-            else if (component instanceof CRectangle)
-            {
-                final CRectangle rectangle = (CRectangle) component;
-                rectangle.setWidth(applyResize(rectangle.getWidth()));
-                rectangle.setHeight(applyResize(rectangle.getHeight()));
-                rectangle.setThickness(applyResize(rectangle.getThickness()));
-            }
-            else if (component instanceof CDiagonalLine)
-            {
-                final CDiagonalLine diagonalLine = (CDiagonalLine)component;
-                diagonalLine.setWidth(applyResize(diagonalLine.getWidth()));
-                diagonalLine.setHeight(applyResize(diagonalLine.getHeight()));
-                diagonalLine.setThickness(Math.max(applyResize(diagonalLine.getThickness()), 1)); // We don't ever want thickness to be less than 1, otherwise it won't show up in the design tab
-            }
-            else if (component instanceof CImage)
-            {
-                final CImage image = (CImage)component;
-                image.setHorizontalScaling(applyResize(image.getHorizontalScaling()));
-                image.setVerticalScaling(applyResize(image.getVerticalScaling()));
+                case CLine line ->
+                {
+                    line.setLength(applyResize(line.getLength()));
+                    line.setThickness(Math.max(applyResize(line.getThickness()), 1)); // We don't ever want thickness to be less than 1, otherwise it won't show up in the design tab
+                }
+                case CRectangle rectangle ->
+                {
+                    rectangle.setWidth(applyResize(rectangle.getWidth()));
+                    rectangle.setHeight(applyResize(rectangle.getHeight()));
+                    rectangle.setThickness(applyResize(rectangle.getThickness()));
+                }
+                case CDiagonalLine diagonalLine ->
+                {
+                    diagonalLine.setWidth(applyResize(diagonalLine.getWidth()));
+                    diagonalLine.setHeight(applyResize(diagonalLine.getHeight()));
+                    diagonalLine.setThickness(Math.max(applyResize(diagonalLine.getThickness()), 1)); // We don't ever want thickness to be less than 1, otherwise it won't show up in the design tab
+                }
+                case CImage image ->
+                {
+                    image.setHorizontalScaling(applyResize(image.getHorizontalScaling()));
+                    image.setVerticalScaling(applyResize(image.getVerticalScaling()));
+                }
+                default ->
+                {
+                    // No-op
+                }
             }
         }
     }
