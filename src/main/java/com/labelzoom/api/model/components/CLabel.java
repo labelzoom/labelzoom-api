@@ -117,11 +117,6 @@ public class CLabel
                     layerMap.put(clone.getName(), clone);
                 }
             }
-            else
-            {
-                layers = null;
-                layerMap.clear();
-            }
             if (original.getDataCommand() != null)
             {
                 dataCommand = original.getDataCommand().clone();
