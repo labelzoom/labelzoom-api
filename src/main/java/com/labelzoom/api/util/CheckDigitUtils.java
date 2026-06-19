@@ -1,5 +1,7 @@
 package com.labelzoom.api.util;
 
+import java.util.Objects;
+
 public class CheckDigitUtils
 {
     public enum CheckDigitType
@@ -9,11 +11,11 @@ public class CheckDigitUtils
 
     public static int getCheckDigit(final String barcode, final CheckDigitType type)
     {
-        switch (type)
+        if (Objects.requireNonNull(type) == CheckDigitType.MOD10)
         {
-            case MOD10: return getMod10CheckDigit(barcode);
-            default: throw new IllegalArgumentException("Invalid check digit type");
+            return getMod10CheckDigit(barcode);
         }
+        throw new IllegalArgumentException("Invalid check digit type");
     }
 
     private static int getMod10CheckDigit(final String barcode)

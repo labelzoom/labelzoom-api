@@ -66,13 +66,13 @@ public class CImage extends AComponent
      */
     public static BufferedImage getBufferedImage(final Image img)
     {
-        if (img instanceof BufferedImage)
+        if (img instanceof BufferedImage bufferedImage)
         {
-            return (BufferedImage) img;
+            return bufferedImage;
         }
-        else if (img instanceof RenderedImage)
+        else if (img instanceof RenderedImage renderedImage)
         {
-            return ImageUtils.cloneImage((RenderedImage) img);
+            return ImageUtils.cloneImage(renderedImage);
         }
 
         final BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);

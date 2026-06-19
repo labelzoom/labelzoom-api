@@ -92,9 +92,9 @@ public class ImageUtils
     }
 
     private static int applyError(int pixel, int error) {
-        int red = Math.min(Math.max(((pixel >> 16) & 0xff) + error, 0), 255);
-        int green = Math.min(Math.max(((pixel >> 8) & 0xff) + error, 0), 255);
-        int blue = Math.min(Math.max((pixel & 0xff) + error, 0), 255);
+        int red = Math.clamp(((pixel >> 16) & 0xff) + error, 0, 255);
+        int green = Math.clamp(((pixel >> 8) & 0xff) + error, 0, 255);
+        int blue = Math.clamp((pixel & 0xff) + error, 0, 255);
         return (pixel & 0xff000000) | (red << 16) | (green << 8) | blue;
     }
 

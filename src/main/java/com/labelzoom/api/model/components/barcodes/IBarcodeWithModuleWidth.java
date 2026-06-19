@@ -32,6 +32,6 @@ public interface IBarcodeWithModuleWidth
 
     default float getModuleWidthInMm(final int dpi)
     {
-        return (float)this.getBarcodeSize().getValue() / (float)dpi * 25.4f;
+        return (float)this.getBarcodeSize().getValue() / dpi * 25.4f;
     }
 }

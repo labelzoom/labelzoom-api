@@ -2,6 +2,8 @@ package com.labelzoom.api.util;
 
 /* Credit: https://github.com/jeffjianzhao/DAViewer/blob/master/src/daviewer/HSLColor.java */
 
+import lombok.Getter;
+
 import java.awt.*;
 
 /**
@@ -24,9 +26,9 @@ import java.awt.*;
  */
 public class HSLColor
 {
-    private Color rgb;
-    private float[] hsl;
-    private float alpha;
+    private final Color rgb;
+    private final float[] hsl;
+    @Getter private final float alpha;
 
     /**
      *  Create a HSLColor object using an RGB Color object.
@@ -46,7 +48,7 @@ public class HSLColor
      *
      *  @param h is the Hue value in degrees between 0 - 360
      *  @param s is the Saturation percentage between 0 - 100
-     *  @param l is the Lumanance percentage between 0 - 100
+     *  @param l is the Luminance percentage between 0 - 100
      */
     public HSLColor(float h, float s, float l)
     {
@@ -58,7 +60,7 @@ public class HSLColor
      *
      *  @param h     the Hue value in degrees between 0 - 360
      *  @param s     the Saturation percentage between 0 - 100
-     *  @param l     the Lumanance percentage between 0 - 100
+     *  @param l     the Luminance percentage between 0 - 100
      *  @param alpha the alpha value between 0 - 1
      */
     public HSLColor(float h, float s, float l, float alpha)
@@ -159,16 +161,6 @@ public class HSLColor
         float l = Math.min(100.0f, hsl[2] * multiplier);
 
         return toRGB(hsl[0], hsl[1], l, alpha);
-    }
-
-    /**
-     *  Get the Alpha value.
-     *
-     *  @return the Alpha value.
-     */
-    public float getAlpha()
-    {
-        return alpha;
     }
 
     /**

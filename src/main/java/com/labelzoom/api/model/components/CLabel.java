@@ -117,11 +117,6 @@ public class CLabel
                     layerMap.put(clone.getName(), clone);
                 }
             }
-            else
-            {
-                layers = null;
-                layerMap.clear();
-            }
             if (original.getDataCommand() != null)
             {
                 dataCommand = original.getDataCommand().clone();
@@ -135,8 +130,27 @@ public class CLabel
     public boolean isHighRes() { return dpi >= 1000; }
     public void setHighRes(final boolean isHighRes) { dpi = isHighRes ? 1000 : 100; }
 
-    public void setElements(final List<AComponent> elements) { getLayerMap().get(DEFAULT_LAYER_NAME).setElements(elements); } // TODO: Multi-layer support
-    public List<AComponent> getElements() { return getLayerMap().get(DEFAULT_LAYER_NAME).getElements(); } // TODO: Multi-layer support
+    public void setElements(final List<AComponent> elements)
+    {
+        final var layer = new CLayer(DEFAULT_LAYER_NAME);
+        layer.setElements(elements);
+
+        layerMap.clear();
+        layerMap.put(DEFAULT_LAYER_NAME, layer);
+
+        layers.clear();
+        layers.add(layer);
+    }
+
+    /**
+     * @return unmodifiable list of elements across all layers
+     */
+    public List<AComponent> getElements()
+    {
+        return getLayerMap().values().stream()
+            .flatMap(layer -> layer.getElements().stream())
+            .toList();
+    }
 
     /**
      * Keeps the layer map in sync with the layer list. The underlying data structure of the layers must be a list
@@ -146,15 +160,12 @@ public class CLabel
      */
     private Map<String, CLayer> getLayerMap()
     {
-        if (layers != null)
+        if (layers != null && layers.size() != layerMap.size())
         {
-            if (layers.size() != layerMap.size())
+            this.layerMap.clear();
+            for (CLayer layer : layers)
             {
-                this.layerMap.clear();
-                for (CLayer layer : layers)
-                {
-                    layerMap.put(layer.getName(), layer);
-                }
+                layerMap.put(layer.getName(), layer);
             }
         }
         layerMap.computeIfAbsent(DEFAULT_LAYER_NAME, CLayer::new);
@@ -163,28 +174,22 @@ public class CLabel
 
     public boolean isLandscape()
     {
-        switch (this.getOrientation())
+        return switch (this.getOrientation())
         {
-            case Landscape:
-            case ReverseLandscape:
-                return true;
-            default:
-                return false;
-        }
+            case Landscape, ReverseLandscape -> true;
+            default -> false;
+        };
     }
 
     public boolean isInverted()
     {
-        switch (this.getOrientation())
+        return switch (this.getOrientation())
         {
-            case ReversePortrait:
-            case ReverseLandscape:
-                return true;
-            default:
-                return false;
-        }
+            case ReversePortrait, ReverseLandscape -> true;
+            default -> false;
+        };
     }
-    
+
     @Override
     public CLabel clone() { return clone(false); }
     public CLabel clone(final boolean cloneData)
