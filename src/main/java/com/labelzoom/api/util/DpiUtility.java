@@ -73,9 +73,9 @@ public class DpiUtility
                         variableText.setHeight(applyResize(variableText.getHeight()));
                     }
                 }
-                case ABarcode aBarcode ->
+                case ABarcode barcode ->
                 {
-                    if (component instanceof ALinearBarcode linearBarcode)
+                    if (barcode instanceof ALinearBarcode linearBarcode)
                     {
                         linearBarcode.setHeight(applyResize(linearBarcode.getHeight()));
                     }
