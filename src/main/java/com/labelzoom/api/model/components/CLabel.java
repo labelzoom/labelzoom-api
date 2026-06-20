@@ -130,27 +130,8 @@ public class CLabel
     public boolean isHighRes() { return dpi >= 1000; }
     public void setHighRes(final boolean isHighRes) { dpi = isHighRes ? 1000 : 100; }
 
-    public void setElements(final List<AComponent> elements)
-    {
-        final var layer = new CLayer(DEFAULT_LAYER_NAME);
-        layer.setElements(elements);
-
-        layerMap.clear();
-        layerMap.put(DEFAULT_LAYER_NAME, layer);
-
-        layers.clear();
-        layers.add(layer);
-    }
-
-    /**
-     * @return unmodifiable list of elements across all layers
-     */
-    public List<AComponent> getElements()
-    {
-        return getLayerMap().values().stream()
-            .flatMap(layer -> layer.getElements().stream())
-            .toList();
-    }
+    public void setElements(final List<AComponent> elements) { getLayerMap().get(DEFAULT_LAYER_NAME).setElements(elements); } // TODO: Multi-layer support
+    public List<AComponent> getElements() { return getLayerMap().get(DEFAULT_LAYER_NAME).getElements(); } // TODO: Multi-layer support
 
     /**
      * Keeps the layer map in sync with the layer list. The underlying data structure of the layers must be a list
