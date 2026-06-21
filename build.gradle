@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.labelzoom.api'
-version = '2.0.1'
+version = project.findProperty('projectVersion') ?: '2026.0.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
