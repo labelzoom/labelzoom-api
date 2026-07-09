@@ -41,8 +41,6 @@ public class CLabel
     @Getter @Setter
     private List<CLayer> layers = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
 
-    private final Map<String, CLayer> layerMap = new TreeMap<>();
-
     @Getter @Setter
     private CDataCommand dataCommand;
 
@@ -114,7 +112,6 @@ public class CLabel
                 {
                     final CLayer clone = layer.clone(cloneData);
                     layers.add(clone);
-                    layerMap.put(clone.getName(), clone);
                 }
             }
             if (original.getDataCommand() != null)
@@ -130,27 +127,37 @@ public class CLabel
     public boolean isHighRes() { return dpi >= 1000; }
     public void setHighRes(final boolean isHighRes) { dpi = isHighRes ? 1000 : 100; }
 
-    public void setElements(final List<AComponent> elements) { getLayerMap().get(DEFAULT_LAYER_NAME).setElements(elements); } // TODO: Multi-layer support
-    public List<AComponent> getElements() { return getLayerMap().get(DEFAULT_LAYER_NAME).getElements(); } // TODO: Multi-layer support
+    public void setElements(final List<AComponent> elements) { getOrCreateBackgroundLayer().setElements(elements); } // TODO: Multi-layer support
+    public List<AComponent> getElements() { return getOrCreateBackgroundLayer().getElements(); } // TODO: Multi-layer support
 
     /**
-     * Keeps the layer map in sync with the layer list. The underlying data structure of the layers must be a list
-     * to be compatible with JAXB (returning Map.values() from getLayers() doesn't work because we need to return a
-     * reference to a list object, not the abstract collection object. I'm under the impression that JAXB uses the
-     * list reference returned from the getLayers() method to add or remove items)
+     * Resolves the single "background" layer that {@link #getElements()}, {@link #setElements(List)} and
+     * {@link #addElement(AComponent)} all operate on, creating it (and the backing layer list, if null) when it
+     * does not yet exist. The {@code layers} list is the single source of truth: routing every element accessor
+     * through this one method guarantees they always target the same {@link CLayer} instance regardless of the
+     * order in which they are called.
+     * <p>
+     * This replaces an earlier map-based cache whose lazy {@code computeIfAbsent} materialized a phantom
+     * background layer that lived only in the cache. Because {@code addElement} wrote into a separately created
+     * layer in {@code layers}, any element added after a {@code getElements()} call on an otherwise-empty label
+     * was silently dropped.
      */
-    private Map<String, CLayer> getLayerMap()
+    private CLayer getOrCreateBackgroundLayer()
     {
-        if (layers != null && layers.size() != layerMap.size())
+        if (layers == null)
         {
-            this.layerMap.clear();
-            for (CLayer layer : layers)
+            layers = new ArrayList<>(); // Using ArrayList because that's what Jackson uses
+        }
+        for (final CLayer layer : layers)
+        {
+            if (DEFAULT_LAYER_NAME.equals(layer.getName()))
             {
-                layerMap.put(layer.getName(), layer);
+                return layer;
             }
         }
-        layerMap.computeIfAbsent(DEFAULT_LAYER_NAME, CLayer::new);
-        return layerMap;
+        final CLayer background = new CLayer(DEFAULT_LAYER_NAME);
+        layers.add(background);
+        return background;
     }
 
     public boolean isLandscape()
@@ -180,13 +187,7 @@ public class CLabel
 
     public void addElement(final AComponent component)
     {
-        if (layers.isEmpty())
-        {
-            final CLayer mainContainer = new CLayer();
-            mainContainer.setName(DEFAULT_LAYER_NAME);
-            layers.add(mainContainer);
-        }
-        layers.get(0).getElements().add(component);
+        getOrCreateBackgroundLayer().getElements().add(component);
     }
 
     /**
