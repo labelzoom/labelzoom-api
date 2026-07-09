@@ -4,14 +4,22 @@ on:
     workflows: ['Gradle Build']
     types:
       - completed
-permissions:
-  contents: read
-  actions: read
-  checks: write
-  pull-requests: write
+# No workflow-wide permissions; the job below grants only the scopes it needs.
+permissions: {}
 jobs:
   report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Action repo access
+      actions: read   # Download the test-results artifact from the build run
+      checks: write   # Publish the JUnit check run
+    # The Gradle Build workflow cancels in-progress runs (cancel-in-progress: true).
+    # A cancelled/skipped build never uploads the test-results artifact, so only
+    # report when the build actually completed (success = passing, failure = test
+    # failures still upload results via `if: !cancelled()`).
+    if: >-
+      github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure'
     steps:
       - uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2 # v3.0.0
         with:

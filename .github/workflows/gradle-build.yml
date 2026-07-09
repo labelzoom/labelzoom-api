@@ -18,17 +18,17 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: read
-  checks: write  # For test result publishing
-  pull-requests: write  # For commenting on PRs
-  id-token: write # For Codecov
+# No workflow-wide permissions; each job grants only the scopes it needs.
+permissions: {}
 
 jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read   # Checkout
+      id-token: write  # Codecov OIDC upload
 
     steps:
     - name: Checkout code

@@ -11,9 +11,13 @@ on:
   release:
     types: [created]
 
+# No workflow-wide permissions; each job grants only the scopes it needs.
+permissions: {}
+
 jobs:
   set-version:
     runs-on: ubuntu-latest
+    permissions: {}  # Only computes an output string; needs no token scopes
     outputs:
       release_version: ${{ steps.version.outputs.release_version }}
     steps:
