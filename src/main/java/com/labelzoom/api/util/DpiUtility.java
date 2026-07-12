@@ -15,6 +15,7 @@ package com.labelzoom.api.util;
 import com.labelzoom.api.model.components.*;
 import com.labelzoom.api.model.components.barcodes.ABarcode;
 import com.labelzoom.api.model.components.barcodes.linear.ALinearBarcode;
+import com.labelzoom.api.model.components.barcodes.twod.CBarcodeDataMatrix;
 
 import java.util.List;
 
@@ -78,6 +79,14 @@ public class DpiUtility
                     if (barcode instanceof ALinearBarcode linearBarcode)
                     {
                         linearBarcode.setHeight(applyResize(linearBarcode.getHeight()));
+                    }
+                    else if (barcode instanceof CBarcodeDataMatrix dataMatrix)
+                    {
+                        // symbolHeight is the ^BX module dimension in dots, so it must scale with the label
+                        // like positions do. Without this the module stays at source-DPI size while the
+                        // symbol's placement shrinks to target DPI, so the symbol renders oversized and
+                        // overlaps neighbouring fields into a solid black block. Never let it round to 0.
+                        dataMatrix.setSymbolHeight(Math.max(applyResize(dataMatrix.getSymbolHeight()), 1));
                     }
                 }
                 case CLine line ->
