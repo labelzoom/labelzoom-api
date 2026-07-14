@@ -18,7 +18,16 @@ public interface IBarcodeWithModuleWidth
         XXLarge(6),
         XXXLarge(7),
         XXXXLarge(8),
-        XXXXXLarge(9);
+        XXXXXLarge(9),
+        /* ZPL's ^BY accepts a module width of up to 10, and real-world printer output honours even larger
+         * out-of-spec values rather than clamping, so the scale continues past the original 9.
+         */
+        Width10(10),
+        Width11(11),
+        Width12(12),
+        Width13(13),
+        Width14(14),
+        Width15(15);
 
         private final int value;
 
