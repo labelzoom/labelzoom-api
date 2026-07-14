@@ -35,6 +35,15 @@ public class CLabel
     @Getter @Setter
     private int dpi = 100;
 
+    /**
+     * The DPI of the device the label was originally authored for (e.g. 203 for most ZPL). Some barcode
+     * dimensions -- module widths and 2D magnification factors -- are expressed in native source-DPI dots
+     * and are NOT rescaled when the label is normalized to {@link #dpi}, so renderers need the source DPI
+     * to convert them to physical units.
+     */
+    @Getter @Setter
+    private int sourceDpi = 203;
+
     @Getter @Setter
     private PageOrientation orientation = PageOrientation.Portrait;
 
@@ -101,6 +110,7 @@ public class CLabel
             width = original.getWidth();
             height = original.getHeight();
             dpi = original.getDpi();
+            sourceDpi = original.getSourceDpi();
             orientation = original.getOrientation();
             marginLeft = original.marginLeft;
             marginTop = original.marginTop;

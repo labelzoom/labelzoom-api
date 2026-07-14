@@ -12,6 +12,7 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
+import com.labelzoom.api.model.LineColor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,8 @@ public class CRectangle extends AComponent
     private int height;
 
     private int thickness;
+
+    private LineColor color = LineColor.Black;
 
     /**
      * Parameterless constructor
@@ -41,6 +44,7 @@ public class CRectangle extends AComponent
             width = original.width;
             height = original.height;
             thickness = original.thickness;
+            color = original.color;
         }
     }
 
