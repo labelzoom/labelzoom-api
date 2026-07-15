@@ -12,6 +12,7 @@ package com.labelzoom.api.model.components;
  * or distributed except as authorized by the license.
  */
 
+import com.labelzoom.api.model.LineColor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,6 +39,8 @@ public class CDiagonalLine extends AComponent
 
     private int thickness;
 
+    private LineColor color = LineColor.Black;
+
     /**
      * Parameterless constructor
      */
@@ -56,6 +59,7 @@ public class CDiagonalLine extends AComponent
             width = original.getWidth();
             height = original.getHeight();
             thickness = original.getThickness();
+            color = original.getColor();
         }
     }
 
